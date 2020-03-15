@@ -1,8 +1,6 @@
 # Keskustelufoorumi
 
-Harjoitustyökurssi tietokantasovellus
-
-Tarkoituksena on luoda keskustelufoorumi. Käyttäjät voivat kirjautumisen jälkeen osallistua keskusteluun.
+Tarkoituksena on luoda keskustelufoorumi tietokantojen harjoitustyökurssille. Käyttäjät voivat kirjautumisen jälkeen osallistua keskusteluun lukemalla ja lähettämällä viestejä. Viestit voidaan myös kohdistaa tiettyihin viesteihin. Sivulla on myös hakutoiminto. Ylläpitäjillä on oma alue keskustelufoorumin hallintaan.
 
 Toimintoja:
 
