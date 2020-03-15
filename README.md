@@ -7,4 +7,6 @@ Toimintoja:
 Kirjautuminen, Kirjoituksen lisääminen, Kirjoitusten näyttäminen eri kriteerein, Ryhmän jäsenen lisääminen, muokkaaminen ja poistaminen, Vastineen laatiminen ja muokkaus, Kirjoitusten poistaminen, Aiheiden määrittely, muokkaus ja poisto
 
 Tietokantakaavio:
+
+
 ![alt text](https://github.com/Meemeimei/Keskustelufoorumi/blob/master/Dokumentaatio/0e73f6ec.png)
