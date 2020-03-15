@@ -11,3 +11,5 @@ Ryhmän jäsenen lisääminen, muokkaaminen ja poistaminen
 Vastineen laatiminen ja muokkaus
 Kirjoitusten poistaminen
 Aiheiden määrittely, muokkaus ja poisto
+
+![alt text](https://github.com/Meemeimei/Keskustelufoorumi/blob/master/Dokumentaatio/0e73f6ec.png)
