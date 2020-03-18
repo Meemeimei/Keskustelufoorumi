@@ -1,12 +1,14 @@
-### H3 User storyt
+### User storyt
 
 Käyttäjänä haluan rekisteröityä foorumille
 
-Käyttäjänä haluan voida kirjautua remisteröimilläni tunnuksilla foorumille
+Käyttäjänä haluan voida kirjautua rekisteröimilläni tunnuksilla foorumille
 
 Käyttäjänä haluan aloittaa keskusteluita foorumille
 
 Käyttäjänä haluan lisätä käyttäjiä ryhmiini
+
+Käyttäjänä haluan nähdä ryhmäni aloitukset
 
 Käyttäjänä haluan vastata aloituksiin
 
