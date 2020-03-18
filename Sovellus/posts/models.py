@@ -1,4 +1,5 @@
 from Sovellus import db
+import datetime
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,6 +13,9 @@ class Post(db.Model):
         nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'))
 
-    def __init__(self, name):
-        self.name = name
-        self.done = False
+    def __init__(self, content, user_id, area_id, group_id):
+        self.content = content
+        self.createdOn = datetime.datetime.now()        
+        self.user_id = user_id
+        self.area_id = area_id
+        self.group_id = group_id

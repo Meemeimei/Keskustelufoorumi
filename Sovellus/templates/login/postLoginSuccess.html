@@ -1,0 +1,12 @@
+{% extends "shared/loginLayout.html" %}
+
+{% block body %}
+<p>
+  <div>Kirjautuminen onnistui, sinut ohjataan sisään hetken kuluttua</div>
+</p>
+
+<script>
+    sessionStorage.setItem('loginValid', 'true');
+    window.location='home'
+</script>
+{% endblock %}

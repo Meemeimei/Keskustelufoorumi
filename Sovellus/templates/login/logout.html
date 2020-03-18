@@ -1,0 +1,23 @@
+{% extends "shared/loginLayout.html" %}
+
+{% block body %}
+<p>
+  <div>Olet nyt kirjautunut ulos</div>
+  <div>Sinut ohjataan kirjautumissivulle <span id="secondsCounter">6</span> sekunnin päästä</div>
+</p>
+
+<script>
+    sessionStorage.removeItem('loginValid');
+    var seconds = 6;
+    setInterval(function(){ 
+        var secondsCounter = $("#secondsCounter");
+        seconds -= 1;
+        secondsCounter.text(seconds);
+        if (seconds <= 0) {
+            window.location = 'login';
+        }
+    }, 1000);
+</script>
+
+
+{% endblock %}

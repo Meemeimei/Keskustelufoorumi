@@ -7,4 +7,4 @@ class Area(db.Model):
 
     def __init__(self, name):
         self.name = name
-        self.done = False
+        self.messageCount = 0

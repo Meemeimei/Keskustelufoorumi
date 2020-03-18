@@ -1,0 +1,38 @@
+{% extends "shared/loginLayout.html" %}
+
+{% block body %}
+<p>
+  <div>{{ message }}</div>
+    <form method="POST" action="{{ url_for('login') }}">
+      <div>
+        <span>Käyttäjätunnus</span><input type="text" name="username" 
+                                          pattern=".{3,10}"
+                                          required title="3-10 merkkiä pitkä"/>
+      </div>
+      <div>
+        <span>Salasana</span><input id="passwordInput" type="password" name="password"
+                                    pattern=".{3,10}"
+                                    required title="3-10 merkkiä pitkä"/>
+        <input type="checkbox" onclick="displayPassword()"><span>Näytä salasana</span>
+      </div>
+      <div>
+        <input type="submit" value="Kirjaudu"/>
+      </div>
+    </form>
+
+    <div>
+        <button onclick="window.location='register'">Rekisteröidy</button>
+    </div>
+</p>
+
+<script>
+    function displayPassword() {
+      var x = document.getElementById("passwordInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+  </script>
+{% endblock %}
