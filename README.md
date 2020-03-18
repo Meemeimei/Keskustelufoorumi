@@ -4,7 +4,9 @@ Tarkoituksena on luoda keskustelufoorumi tietokantojen harjoitustyökurssille. K
 
 Toimintoja:
 
-Kirjautuminen, Kirjoituksen lisääminen, Kirjoitusten näyttäminen eri kriteerein, Ryhmän jäsenen lisääminen, muokkaaminen ja poistaminen, Vastineen laatiminen ja muokkaus, Kirjoitusten poistaminen, Aiheiden määrittely, muokkaus ja poisto
+Kirjautuminen, Kirjoituksen lisääminen, Kirjoitusten näyttäminen eri kriteerein, Ryhmän jäsenen lisääminen, muokkaaminen ja poistaminen, Vastineen laatiminen ja muokkaus, Kirjoitusten poistaminen, Aiheiden määrittely, muokkaus ja poisto.
+
+[User storyt](../Dokumentaatio/UserStoryt.md)
 
 Tietokantakaavio:
 
