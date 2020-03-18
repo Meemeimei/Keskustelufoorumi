@@ -10,6 +10,6 @@ db = SQLAlchemy(app)
 
 from Sovellus import views
 
-from Sovellus.users import models
+from Sovellus.users import users
 
 db.create_all()
