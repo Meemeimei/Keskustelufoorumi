@@ -2,7 +2,10 @@
 
 Tarkoituksena on luoda keskustelufoorumi tietokantojen harjoitustyökurssille. Käyttäjät voivat kirjautumisen jälkeen osallistua keskusteluun lukemalla ja lähettämällä viestejä. Viestit voidaan myös kohdistaa tiettyihin viesteihin. Sivulla on myös hakutoiminto. Ylläpitäjillä on oma alue keskustelufoorumin hallintaan.
 
-[Heroku](https://cryptic-temple-28944.herokuapp.com/login "cryptic-temple-28944.herokuapp.com")
+[Herokulinkki](https://cryptic-temple-28944.herokuapp.com/login "cryptic-temple-28944.herokuapp.com")
+
+Testitunnukset:
+admin - admin
 
 Toimintoja:
 
