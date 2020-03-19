@@ -3,6 +3,7 @@ from Sovellus import app, db
 from Sovellus.users import userController
 from Sovellus.users.models import User
 from Sovellus.home import homeController
+from Sovellus.administration import administrationController
 
 @app.route("/")
 def index():
@@ -40,3 +41,12 @@ def changePasswordPage():
 @app.route("/changePassword", methods=["POST"])
 def changePassword():
     return userController.changePassword()
+
+@app.route("/administration", methods=["GET"])
+def administration():
+    return administrationController.administration()
+
+@app.route("/administration/delete/<userId>/", methods=["POST"])
+def deleteUser(userId):
+    return administrationController.deleteUser(userId)
+    

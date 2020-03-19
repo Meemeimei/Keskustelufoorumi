@@ -14,4 +14,4 @@ def home():
     if (user == None):
         return render_template("login/logout.html")
 
-    return render_template("home/index.html", username=user.username, token=token)
+    return render_template("home/index.html", username=user.username, token=token, admin=user.admin)

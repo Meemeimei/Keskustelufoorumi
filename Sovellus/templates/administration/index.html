@@ -1,0 +1,36 @@
+{% extends "shared/layout.html" %}
+
+{% block body %}
+
+<div id="userControl"> <a href="javascript:returnHome()">Takaisin</a></div>
+<div id="messageDiv">{{ message }}</div>
+<p>
+  <div>
+    Rekisteröityneet käyttäjät:
+    <table>
+        <tr>
+          <th>Käyttäjä</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+          <td>
+              {{ user.username }}
+            <form method="POST" action="{{ url_for('deleteUser', userId=user.id) }}">
+                <input type="submit" value="Poista"/>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+  </div>
+</p>
+<form id="tokenForm" method="POST" action="{{ url_for('home') }}" hidden>
+    <input id="tokenInput" name="token" value= {{ token }} />
+  </form>
+<script>
+    function returnHome() {
+        $("#tokenInput").val(sessionStorage.getItem('loginToken'));
+        $("#tokenForm")[0].submit()
+    }
+</script>
+{% endblock %}

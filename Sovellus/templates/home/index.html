@@ -10,6 +10,11 @@
   <div>
     <button onclick="window.location='changePassword'">Vaihda salasanaa</button>
   </div>
+  {% if admin %}
+  <div>
+    <button onclick="window.location='administration'">Ylläpito</button>
+  </div>
+  {% endif %}
 </p>
 <form id="tokenForm" method="POST" action="{{ url_for('changePassword') }}" hidden>
   <input name="token" value= {{ token }} />
