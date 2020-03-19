@@ -1,14 +1,22 @@
 {% extends "shared/layout.html" %}
 
 {% block body %}
+
+<div id="userControl">Tervetuloa {{ username }} <a href='logout'>Kirjaudu ulos</a></div>
+<div id="messageDiv">{{ message }}</div>
 <p>
   Nothing here yet :/
 
   <div>
-    <button onclick="window.location='logout'">Kirjaudu ulos</button>
-  </div>
-  <div>
     <button onclick="window.location='changePassword'">Vaihda salasanaa</button>
   </div>
 </p>
+<form id="tokenForm" method="POST" action="{{ url_for('changePassword') }}" hidden>
+  <input name="token" value= {{ token }} />
+</form>
+<script>
+  function changePassword() {
+    $("#tokenForm")[0].submit()
+  }
+</script>
 {% endblock %}

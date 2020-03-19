@@ -12,6 +12,8 @@ Käyttäjänä haluan nähdä ryhmäni aloitukset
 
 Käyttäjänä haluan vastata aloituksiin
 
+Käyttäjänä haluan vaihtaa salasanaani tarvittaessa
+
 Ylläpitäjänä haluan poistaa tunnuksia
 
 Ylläpitäjänä haluan poistaa aiheita, ryhmiä ja viestejä

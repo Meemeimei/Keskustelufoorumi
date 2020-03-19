@@ -3,12 +3,13 @@
 {% block body %}
 <p>
   <div>Olet nyt kirjautunut ulos</div>
-  <div>Sinut ohjataan kirjautumissivulle <span id="secondsCounter">6</span> sekunnin päästä</div>
+  <div>Sinut ohjataan kirjautumissivulle <span id="secondsCounter">3</span> sekunnin päästä</div>
 </p>
 
 <script>
     sessionStorage.removeItem('loginValid');
-    var seconds = 6;
+    sessionStorage.removeItem('loginToken');
+    var seconds = 3;
     setInterval(function(){ 
         var secondsCounter = $("#secondsCounter");
         seconds -= 1;

@@ -4,9 +4,13 @@
 <p>
   <div>Kirjautuminen onnistui, sinut ohjataan sisään hetken kuluttua</div>
 </p>
-
+<span id="tokenSpan" hidden>{{ token }}</span>
+<form id="tokenForm" method="POST" action="{{ url_for('home') }}" hidden>
+  <input name="token" value= {{ token }} />
+</form>
 <script>
-    sessionStorage.setItem('loginValid', 'true');
-    window.location='home'
+  sessionStorage.setItem('loginValid', 'true');
+  sessionStorage.setItem('loginToken', $("#tokenSpan").text());
+  $("#tokenForm")[0].submit()
 </script>
 {% endblock %}

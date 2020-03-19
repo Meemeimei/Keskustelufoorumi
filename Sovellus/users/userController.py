@@ -1,6 +1,7 @@
 from flask import render_template, request
 from Sovellus import app, db
 from Sovellus.users.models import User
+import uuid
 
 def loginIndex():
     return render_template("login/index.html")
@@ -25,7 +26,10 @@ def login():
     user = db.session.query(User).filter_by(username=request.form.get("username")).first()
 
     if (user != None and str(user.password) == str(hash(request.form.get("password")))):
-        return render_template("login/postLoginSuccess.html")
+        newToken = str(uuid.uuid4())
+        user.token = newToken
+        db.session().commit()
+        return render_template("login/postLoginSuccess.html", token = newToken)
     else:
         return render_template("login/postLoginFail.html")
     
@@ -33,16 +37,17 @@ def logout():
     return render_template("login/logout.html")
 
 def changePassword():
-    # TODO: return a message whether change succeeded
-
     oldPassword = str(hash(request.form.get("oldPassword")))
     newPassword = str(hash(request.form.get("newPassword")))
-    username = request.form.get("newPassword")
+    token = request.form.get("token")
+    if (token != None and token != ""):
+        user = db.session.query(User).filter_by(token=token).first()
+        if (user != None and str(user.password) == oldPassword):
+            user.password = newPassword
+            db.session().commit()
+            return render_template("home/index.html", message="Salasanan vaihto onnistui!")
 
-    user = User.query.filter_by(username=username).first()
-    if (user != None and str(user.password) == oldPassword):
-        user.password = newPassword
-        db.session().commit()
-        return render_template("home/index.html")
+    return render_template("home/index.html", message="Salasanan vaihto epaonnistui")
 
-    return render_template("home/index.html")
+def changePasswordPage():
+    return render_template("login/changePassword.html")
