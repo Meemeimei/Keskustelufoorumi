@@ -30,5 +30,8 @@ def login():
 @app.route("/logout")
 def logout():
     return userController.logout()
-    
+
+@app.route("/changePassword")
+def changePassword():
+    return userController.changePassword()
 

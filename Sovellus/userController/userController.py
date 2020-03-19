@@ -31,3 +31,18 @@ def login():
     
 def logout():
     return render_template("login/logout.html")
+
+def changePassword():
+    # TODO: return a message whether change succeeded
+
+    oldPassword = str(hash(request.form.get("oldPassword")))
+    newPassword = str(hash(request.form.get("newPassword")))
+    username = request.form.get("newPassword")
+
+    user = User.query.filter_by(username=username).first()
+    if (user != None and str(user.password) == oldPassword):
+        user.password = newPassword
+        db.session().commit()
+        return render_template("home/index.html")
+
+    return render_template("home/index.html")

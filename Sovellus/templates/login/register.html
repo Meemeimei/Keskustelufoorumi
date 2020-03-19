@@ -4,21 +4,23 @@
 <p>
   <form method="POST" action="{{ url_for('register') }}">
     <div>
-      <span>Käyttäjätunnus</span><input type="text" name="username"
+      <span>Käyttäjätunnus</span><input id="usernameInput" type="text" name="username"
         pattern=".{3,10}"
-        required title="3-10 merkkiä pitkä"/>
+        required title="3-10 merkkiä pitkä"
+        onkeyup="validate()"/>
     </div>
     <div>
       <span>Salasana</span><input id="passwordInput" type="password" name="password"
         pattern=".{3,10}"
-        required title="3-10 merkkiä pitkä"/>
+        required title="3-10 merkkiä pitkä"
+        onkeyup="validate()"/>
     </div>
     <div>
       <span>Uusi salasana uudestaan</span><input id="passwordCheck" type="password"
         name="password"
         pattern=".{3,10}"
         required title="3-10 merkkiä pitkä"
-        onkeydown="compare()"/>
+        onkeyup="validate()"/>
       <input type="checkbox" onclick="displayPassword()"><span>Näytä salasana</span>
     </div>
     <div>
@@ -30,21 +32,29 @@
 
 <script>
   function displayPassword() {
-      var passwordInput = $("#passwordInput");
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
+      var x = document.getElementById("passwordInput");
+      var y = document.getElementById("passwordCheck");
+      if (x.type === "password") {
+          x.type = "text";
+          y.type = "text";
       } else {
-        passwordInput.type = "password";
+          x.type = "password";
+          y.type = "password"
       }
-    }
+  }
 
-    function compare() {
+  function validate() {
         if($("#passwordInput").val() === $("#passwordCheck").val()) {
-            $("#passwordCompareError").hide();
-            $("#submitButton").disabled = false;
+          $("#passwordCompareError")[0].hidden = true;
+          $("#submitButton")[0].disabled = false;
         } else {
-            $("#passwordCompareError").show();
-            $("#submitButton").disabled = true;
+          $("#passwordCompareError")[0].hidden = false;
+          $("#submitButton")[0].disabled = true;
+        }
+        if ($("#usernameInput").val() !== "") {
+          $("#submitButton")[0].disabled = false;
+        } else {
+          $("#submitButton")[0].disabled = true;
         }
     }
 </script>
