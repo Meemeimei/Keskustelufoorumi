@@ -6,6 +6,7 @@ Tarkoituksena on luoda keskustelufoorumi tietokantojen harjoitustyökurssille. K
 
 Testitunnukset:
 admin - admin
+Testausta varten, jos uusi käyttäjä rekisteröidään tunnuksella 'admin' se saa suoraan ylläpito-oikeudet. Ainoa tiedon listausmahdollisuus on tällä hetkellä ylläpitäjillä, jotka voivat listata rekisteröityneet käyttäjät.
 
 Toimintoja:
 
