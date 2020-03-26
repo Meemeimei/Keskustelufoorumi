@@ -65,7 +65,7 @@ pygobject==3.20.0
 pyinotify==0.9.6
 pylint==1.5.2
 Pymacs==0.25
-pyOpenSSL==0.15.1
+pyOpenSSL==17.5.0
 pyparsing==2.0.3
 pyserial==3.0.1
 pytest==2.8.7
