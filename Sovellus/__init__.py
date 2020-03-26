@@ -17,7 +17,6 @@ from Sovellus.groupUsers import models
 from Sovellus.posts import models
 from Sovellus.users import models
 
-# kirjautuminen
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
 
@@ -25,8 +24,10 @@ from flask_login import LoginManager
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-login_manager.login_view = "login/index.html"
+login_manager.login_view = "login"
 login_manager.login_message = "Please login to use this functionality."
+
+from Sovellus.users.models import User
 
 @login_manager.user_loader
 def load_user(user_id):

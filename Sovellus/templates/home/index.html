@@ -6,38 +6,37 @@
 <div id="messageDiv">{{ message }}</div>
 <p>
   <div>Luo uusi alue</div>
-  <form method="POST" action="{{ url_for('area_create') }}">
+  <form method="POST" action="{{ url_for('createArea') }}">
     <table>
       <tr>
 	<td>
-	  {{ form.name.label }}
+	  {{ groupForm.name.label }}
 	</td>
 	<td>
-	  {{ form.name }}
+	  {{ groupForm.name }}
 	</td>
       </tr>
       <tr>
 	<td colspan="2">
-	  <input type="submit" value="Add a new task"/>
+	  <input type="submit" value="Add a new area"/>
 	</td>
       </tr>
   </form>
 
+  {% for area in areas %}
+  <tr>
+    <td>{{ area.name }}</td>
+    <td>{{ area.messageCount }}</td>
+  </tr>
+  {% endfor %}
+
   <div>
-    <button onclick="window.location='changePassword'">Vaihda salasanaa</button>
+    <button onclick="window.location='changePassword'">Change password</button>
   </div>
   {% if admin %}
   <div>
-    <button onclick="window.location='administration'">Ylläpito</button>
+    <button onclick="window.location='administration'">Administration</button>
   </div>
   {% endif %}
 </p>
-<form id="tokenForm" method="POST" action="{{ url_for('changePassword') }}" hidden>
-  <input name="token" value= {{ token }} />
-</form>
-<script>
-  function changePassword() {
-    $("#tokenForm")[0].submit()
-  }
-</script>
 {% endblock %}

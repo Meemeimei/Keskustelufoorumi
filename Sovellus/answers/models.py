@@ -6,7 +6,7 @@ class Answer(db.Model):
     content = db.Column(db.String(144), nullable=False)
     createdOn = db.Column(db.Date, nullable=False)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
+    user_id = db.Column(db.Integer, db.ForeignKey('account.id'),
         nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'),
         nullable=False)

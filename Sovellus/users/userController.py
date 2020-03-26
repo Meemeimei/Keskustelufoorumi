@@ -1,8 +1,9 @@
-from flask import render_template, request
+from flask import render_template, request, redirect
 from Sovellus import app, db
 from Sovellus.users.models import User
 from Sovellus.auth.forms import LoginForm
-from flask_login import login_user
+from flask_login import login_user, logout_user
+from Sovellus.home import homeController
 import uuid
 
 def loginIndex():
@@ -19,7 +20,7 @@ def login():
         return render_template("login/index.html", form = form,
                                error = "No such username or password")
     login_user(user)
-    return render_template("home/index.html")
+    return homeController.home()
    
 
 def register():
@@ -28,16 +29,17 @@ def register():
     password = str(hash(form.password.data))
     
     user = User.query.filter_by(username=username).first()
-    if not user:
-        return render_template("login/register.html", error = "Username is already in use")
+    if user:
+        return render_template("login/register.html", form=LoginForm() , error = "Username is already in use")
     else:
         user = User(username, password)
         db.session().add(user)
         db.session().commit()
-        return render_template("login/index.html", error = "Luonti onnistui")
+        return render_template("login/index.html", form=LoginForm(), error = "Luonti onnistui")
  
 def logout():
-    return render_template("login/logout.html")
+    logout_user()
+    return loginIndex() 
 
 def changePassword():
     oldPassword = str(hash(request.form.get("oldPassword")))

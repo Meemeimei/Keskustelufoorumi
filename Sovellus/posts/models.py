@@ -7,7 +7,7 @@ class Post(db.Model):
     createdOn = db.Column(db.Date, nullable=False)
 
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
+    user_id = db.Column(db.Integer, db.ForeignKey('account.id'),
         nullable=False)
     area_id = db.Column(db.Integer, db.ForeignKey('area.id'),
         nullable=False)
