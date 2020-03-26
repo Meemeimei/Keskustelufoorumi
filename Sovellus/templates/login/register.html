@@ -2,61 +2,32 @@
 
 {% block body %}
 <p>
-  <form id="userRelatedForm" method="POST" action="{{ url_for('register') }}">
-    <div class="formElement">
-      <span>Käyttäjätunnus: </span><input id="usernameInput" type="text" name="username"
-        pattern=".{3,10}"
-        required title="3-10 merkkiä pitkä"
-        onkeyup="validate()"/>
-    </div>
-    <div class="formElement">
-      <span>Salasana: </span><input id="passwordInput" type="password" name="password"
-        pattern=".{3,10}"
-        required title="3-10 merkkiä pitkä"
-        onkeyup="validate()"/>
-    </div>
-    <div class="formElement">
-      <span>Uusi salasana uudestaan: </span><input id="passwordCheck" type="password"
-        name="password"
-        pattern=".{3,10}"
-        required title="3-10 merkkiä pitkä"
-        onkeyup="validate()"/>
-      <input type="checkbox" onclick="displayPassword()"><span>Näytä salasana</span>
-    </div>
-    <div class="formElement">
-      <div id="passwordCompareError" hidden>Salasanat eivät täsmänneet</div>
-      <input id="submitButton" type="submit" value="Luo uusi käyttäjä" disabled/>
-    </div>
+  {{ error }}
+  <div>Select username and password</div>
+  <form id="loginForm" method="POST" action="{{ url_for('register') }}">
+    <table>
+      <tr>
+        <td>
+          {{ form.username.label }}
+        </td>
+        <td>
+          {{ form.username }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          {{ form.password.label }}
+        </td>
+        <td>
+          {{ form.password }}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input type="submit" value="Register"/>
+        </td>
+      </tr>
   </form>
 </p>
-
-<script>
-  function displayPassword() {
-      var x = document.getElementById("passwordInput");
-      var y = document.getElementById("passwordCheck");
-      if (x.type === "password") {
-          x.type = "text";
-          y.type = "text";
-      } else {
-          x.type = "password";
-          y.type = "password"
-      }
-  }
-
-  function validate() {
-        if($("#passwordInput").val() === $("#passwordCheck").val()) {
-          $("#passwordCompareError")[0].hidden = true;
-          $("#submitButton")[0].disabled = false;
-        } else {
-          $("#passwordCompareError")[0].hidden = false;
-          $("#submitButton")[0].disabled = true;
-        }
-        if ($("#usernameInput").val() !== "") {
-          $("#submitButton")[0].disabled = false;
-        } else {
-          $("#submitButton")[0].disabled = true;
-        }
-    }
-</script>
 
 {% endblock %}

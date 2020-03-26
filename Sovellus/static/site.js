@@ -1,5 +1,12 @@
 $('document').ready(function() {
-    if (window.location != 'login' && sessionStorage.getItem('loginValid') !== 'true') {
-        window.location = 'login';
-    }
+
 });
+
+function displayPassword() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }

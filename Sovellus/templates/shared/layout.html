@@ -12,6 +12,7 @@
   <script src="{{ url_for('static', filename='site.js') }}"></script>
 
   <body>
+    <div> Welcome {{ current_user.name }} </div>
     {% block body %}
     <p>
     </p>

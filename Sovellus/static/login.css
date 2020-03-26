@@ -2,16 +2,6 @@ body {
     background-color: #FFA07A;
 }
 
-.formElement {
-    margin-bottom: 5px;
-    width: 220px;
-}
-
-#userRelatedForm {
-    position: relative;
-    left: 42%;
-}
-
 #topBanner {
     padding: 10px;
 }

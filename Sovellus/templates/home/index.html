@@ -5,7 +5,23 @@
 <div id="userControl">Tervetuloa {{ username }} <a href='logout'>Kirjaudu ulos</a></div>
 <div id="messageDiv">{{ message }}</div>
 <p>
-  Nothing here yet :/
+  <div>Luo uusi alue</div>
+  <form method="POST" action="{{ url_for('area_create') }}">
+    <table>
+      <tr>
+	<td>
+	  {{ form.name.label }}
+	</td>
+	<td>
+	  {{ form.name }}
+	</td>
+      </tr>
+      <tr>
+	<td colspan="2">
+	  <input type="submit" value="Add a new task"/>
+	</td>
+      </tr>
+  </form>
 
   <div>
     <button onclick="window.location='changePassword'">Vaihda salasanaa</button>

@@ -1,6 +1,7 @@
 from flask import render_template, request
 from Sovellus import app, db
 from Sovellus.users.models import User
+from Sovellus.home.forms import AreaForm
 
 def home():
 
@@ -14,4 +15,4 @@ def home():
     if (user == None):
         return render_template("login/logout.html")
 
-    return render_template("home/index.html", username=user.username, token=token, admin=user.admin)
+    return render_template("home/index.html", username=user.username, token=token, admin=user.admin, groupForm = AreaForm())

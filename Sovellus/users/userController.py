@@ -1,38 +1,41 @@
 from flask import render_template, request
 from Sovellus import app, db
 from Sovellus.users.models import User
+from Sovellus.auth.forms import LoginForm
+from flask_login import login_user
 import uuid
 
 def loginIndex():
-    return render_template("login/index.html")
+    return render_template("login/index.html", form = LoginForm())
 
 def registerIndex():
-    return render_template("login/register.html")
+    return render_template("login/register.html", form = LoginForm())
+
+def login():
+    form = LoginForm(request.form)
+
+    user = User.query.filter_by(username=form.username.data, password=str(hash(form.password.data))).first()
+    if not user:
+        return render_template("login/index.html", form = form,
+                               error = "No such username or password")
+    login_user(user)
+    return render_template("home/index.html")
+   
 
 def register():
-    username = request.form.get("username")
-    password = str(hash(request.form.get("password")))
+    form = LoginForm(request.form)
+    username = form.username.data
+    password = str(hash(form.password.data))
     
     user = User.query.filter_by(username=username).first()
-    if (user != None):
-        return render_template("login/index.html", message="K\u00e4ytt\u00e4j\u00e4tunnus on jo k\u00e4yt\u00f6ss\u00e4")
+    if not user:
+        return render_template("login/register.html", error = "Username is already in use")
     else:
         user = User(username, password)
         db.session().add(user)
         db.session().commit()
-        return render_template("login/index.html", message="Luonti onnistui")
-
-def login():
-    user = db.session.query(User).filter_by(username=request.form.get("username")).first()
-
-    if (user != None and str(user.password) == str(hash(request.form.get("password")))):
-        newToken = str(uuid.uuid4())
-        user.token = newToken
-        db.session().commit()
-        return render_template("login/postLoginSuccess.html", token = newToken)
-    else:
-        return render_template("login/postLoginFail.html")
-    
+        return render_template("login/index.html", error = "Luonti onnistui")
+ 
 def logout():
     return render_template("login/logout.html")
 
@@ -45,9 +48,9 @@ def changePassword():
         if (user != None and str(user.password) == oldPassword):
             user.password = newPassword
             db.session().commit()
-            return render_template("home/index.html", message="Salasanan vaihto onnistui!")
+            return render_template("home/index.html", message="Password changed successfully")
 
-    return render_template("home/index.html", message="Salasanan vaihto epaonnistui")
+    return render_template("home/index.html", message="Password change failed")
 
 def changePasswordPage():
     return render_template("login/changePassword.html")
