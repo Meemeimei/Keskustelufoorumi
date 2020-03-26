@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect
 from Sovellus import app, db
 from Sovellus.users.models import User
-from Sovellus.auth.forms import LoginForm
-from flask_login import login_user, logout_user
+from Sovellus.auth.forms import LoginForm, ChangePasswordForm
+from flask_login import login_user, logout_user, current_user
 from Sovellus.home import homeController
 import uuid
 
@@ -42,17 +42,16 @@ def logout():
     return loginIndex() 
 
 def changePassword():
-    oldPassword = str(hash(request.form.get("oldPassword")))
-    newPassword = str(hash(request.form.get("newPassword")))
-    token = request.form.get("token")
-    if (token != None and token != ""):
-        user = db.session.query(User).filter_by(token=token).first()
-        if (user != None and str(user.password) == oldPassword):
-            user.password = newPassword
-            db.session().commit()
-            return render_template("home/index.html", message="Password changed successfully")
+    form = LoginForm(request.form)
+    oldPassword = str(hash(form.oldPassword.data))
+    newPassword = str(hash(form.password.data))
+
+    if (current_user.password == oldPassword):
+        current_user.password = newPassword
+        db.session().commit()
+        return render_template("home/index.html", message="Password changed successfully")
 
     return render_template("home/index.html", message="Password change failed")
 
 def changePasswordPage():
-    return render_template("login/changePassword.html")
+    return render_template("login/changePassword.html", form = ChangePasswordForm())

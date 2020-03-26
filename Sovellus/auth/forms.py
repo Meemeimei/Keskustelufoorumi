@@ -7,3 +7,10 @@ class LoginForm(FlaskForm):
   
     class Meta:
         csrf = False
+
+class ChangePasswordForm(FlaskForm):
+    oldPassword = StringField("Old password", [validators.Length(min=2)])
+    password = PasswordField("Password", [validators.Length(min=2)])
+  
+    class Meta:
+        csrf = False

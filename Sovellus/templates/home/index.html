@@ -30,13 +30,13 @@
   </tr>
   {% endfor %}
 
-  <div>
-    <button onclick="window.location='changePassword'">Change password</button>
-  </div>
-  {% if admin %}
-  <div>
-    <button onclick="window.location='administration'">Administration</button>
-  </div>
+  <form method="GET" action="{{ url_for('changePassword') }}">
+    <input type="submit" value="Change password"/>
+  </form>
+  {% if current_user.is_admin %}
+  <form method="GET" action="{{ url_for('administration') }}">
+    <input type="submit" value="Administration"/>
+  </form>
   {% endif %}
 </p>
 {% endblock %}
