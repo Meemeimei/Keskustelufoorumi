@@ -8,6 +8,8 @@ Testitunnukset:
 admin - admin
 Testausta varten, jos uusi käyttäjä rekisteröidään tunnuksella 'admin' se saa suoraan ylläpito-oikeudet. Ainoa tiedon listausmahdollisuus on tällä hetkellä ylläpitäjillä, jotka voivat listata rekisteröityneet käyttäjät.
 
+Uusien muutosten myötä sivun layout kärsi, korjataan seuraavaan päivitykseen
+
 Toimintoja:
 
 Kirjautuminen, Kirjoituksen lisääminen, Kirjoitusten näyttäminen eri kriteerein, Ryhmän jäsenen lisääminen, muokkaaminen ja poistaminen, Vastineen laatiminen ja muokkaus, Kirjoitusten poistaminen, Aiheiden määrittely, muokkaus ja poisto.
