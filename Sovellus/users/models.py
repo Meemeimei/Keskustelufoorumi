@@ -1,4 +1,5 @@
 from Sovellus import db
+from sqlalchemy.sql import text
 
 class User(db.Model):
 
@@ -7,14 +8,12 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
-    messageCount = db.Column(db.Integer, nullable=False)
     admin = db.Column(db.Boolean, nullable=False)
     token = db.Column(db.String(36))
 
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.messageCount = 0
         if (username == "admin"):
             self.admin = True
         else:
@@ -35,3 +34,12 @@ class User(db.Model):
 
     def is_admin(self):
         return self.admin    
+
+    @staticmethod
+    def countMessages(accountId):
+        statement = text("SELECT "
+                        "(SELECT COUNT(*) FROM Post WHERE User_id = :id) + "
+                        "(SELECT COUNT (*) FROM Answer WHERE User_id = :id)"
+        ).params(id=accountId)
+        return db.engine.execute(statement)
+

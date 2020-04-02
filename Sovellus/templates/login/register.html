@@ -2,8 +2,14 @@
 
 {% block body %}
 <p>
-  {{ error }}
-  <div>Select username and password</div>
+  <h2>Welcome to the SuperForum!</h2>
+  <div></div>
+  <div id="topBanner">Select username and password</div>
+  <div></div>
+  <div id="error" class="text-danger">
+    {{ error }}
+  </div>
+
   <form id="loginForm" method="POST" action="{{ url_for('register') }}">
     <table>
       <tr>
@@ -11,7 +17,7 @@
           {{ form.username.label }}
         </td>
         <td>
-          {{ form.username }}
+          {{ form.username(class_="form-control") }}
         </td>
       </tr>
       <tr>
@@ -19,15 +25,38 @@
           {{ form.password.label }}
         </td>
         <td>
-          {{ form.password }}
+          {{ form.password(class_="form-control", onkeyup="checkPassword()") }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span>Repeat password</span>
+        </td>
+        <td>
+          <input type="password" id="passwordRepeat" class="form-control" onkeyup="checkPassword()">
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <div>
+            <input type="checkbox" class="form-check-input" onclick="displayPassword()"><span>Display password</span>
+          </div>
         </td>
       </tr>
       <tr>
         <td colspan="2">
-          <input type="submit" value="Register"/>
+          <input type="submit" id="submitButton" class="btn btn-primary" value="Register" disabled/>
         </td>
       </tr>
+    </table>
   </form>
+
+  <div>
+    <form method="GET" action="{{ url_for('login') }}">
+      <input type="submit" class="btn btn-info" value="Return"/>
+    </form>
+  </div>
 </p>
 
 {% endblock %}

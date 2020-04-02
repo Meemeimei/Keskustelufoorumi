@@ -6,40 +6,51 @@
   <div></div>
   <div id="topBanner">Login or create an account</div>
   <div></div>
-  {{ error }}
-  <form id="loginForm" method="POST" action="{{ url_for('login') }}">
-    <table>
-      <tr>
-        <td>
-          {{ form.username.label }}
-        </td>
-        <td>
-          {{ form.username }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          {{ form.password.label }}
-        </td>
-        <td>
-          {{ form.password }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <input type="checkbox" onclick="displayPassword()"><span>Display password</span>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <input type="submit" value="Log in"/>
-        </td>
-      </tr>
-  </form>
+  <div class="text-danger">
+    {{ error }}
+  </div>
+  <div id="loginDiv">
+    <form id="loginForm" method="POST" action="{{ url_for('login') }}">
+      <table>
+        <tr>
+          <td>
+            {{ form.username.label }}
+          </td>
+          <td>
+            {{ form.username(class_="form-control") }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.password.label }}
+          </td>
+          <td>
+            {{ form.password(class_="form-control") }}
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div>
+              <input type="checkbox" class="form-check-input" onclick="displayPassword()"><span>Display password</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="submit" class="btn btn-primary" value="Log in"/>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
 
+<div>
   <form method="GET" action="{{ url_for('register') }}">
-    <input type="submit" value="Register"/>
+    <input type="submit" class="btn btn-info" value="Register"/>
   </form>
+</div>
+
 
 </p>
 {% endblock %}

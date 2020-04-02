@@ -1,19 +1,17 @@
 body {
-    background-color: #FFA07A;
+    text-align: center;
+    background-image: url("grey.png");
 }
 
 #topBanner {
     padding: 10px;
 }
 
-#errorMessage {
-    color:red;
+#error {
+    padding-bottom: 10px;
 }
 
-#passwordCompareError {
-    color: red;
-}
-
-#bodyDiv {
+#loginForm {
+    display: inline-block;
     text-align: center;
 }
