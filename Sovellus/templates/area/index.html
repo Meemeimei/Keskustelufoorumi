@@ -1,0 +1,9 @@
+{% extends "shared/layout.html" %}
+
+{% block body %}
+<p>
+    <form method="GET" action="{{ url_for('home') }}">
+        <input id="buttonInput" type="submit" class="btn btn-info" value="Back"/>
+      </form>
+</p>
+{% endblock %}

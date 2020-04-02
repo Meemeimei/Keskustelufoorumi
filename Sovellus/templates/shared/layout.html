@@ -4,15 +4,27 @@
     <meta charset="utf-8">
     <title>Superkeskustelufoorumi</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css') }}">
+    <script src="{{ url_for('static', filename='jquery-3.4.1.min.slim.js') }}"></script>
+    <script src="{{ url_for('static', filename='site.js') }}"></script>
   </head>
 
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css') }}">
-  <script src="{{ url_for('static', filename='jquery-3.4.1.min.slim.js') }}"></script>
-  <script src="{{ url_for('static', filename='site.js') }}"></script>
 
   <body>
-    <div> Welcome {{ current_user.name }} </div>
+    <div id="userControl">Welcome {{ current_user.username }} <a class="btn btn-link" href='logout'>Logout</a>
+      <div id="userControlButtons">
+        <form method="GET" action="{{ url_for('changePassword') }}">
+          <input id="buttonInput" type="submit" class="btn btn-info" value="Change password"/>
+        </form>
+        {% if current_user.is_admin %}
+        <form method="GET" action="{{ url_for('administration') }}">
+          <input id="buttonInput" type="submit" class="btn btn-info" value="Administration"/>
+        </form>
+      </div>
+    </div>
+
+    {% endif %}
     {% block body %}
     <p>
     </p>

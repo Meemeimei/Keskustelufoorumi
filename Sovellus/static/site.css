@@ -1,3 +1,18 @@
 body {
     background-image: url("grey.png");
 }
+
+#userControl {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+#userControlButtons {
+    text-align: right;
+}
+
+#buttonInput {
+    padding: 3px;
+    margin: 3px;
+}

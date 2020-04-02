@@ -31,3 +31,11 @@ function checkPassword() {
     $("#submitButton")[0].disabled = true;
   }
 }
+
+function validateAreaName() {
+  if ($("#name").val() !== "") {
+    $("#submitAreaButton")[0].disabled = false;
+  } else {
+    $("#submitAreaButton")[0].disabled = true;
+  }
+}

@@ -12,7 +12,7 @@ from Sovellus.areas import areaController
 def index():
     return homeController.home()
 
-@app.route("/home", methods=["POST"])
+@app.route("/home")
 @login_required
 def home():
     return homeController.home()
@@ -61,6 +61,11 @@ def deleteUser(userId):
 @login_required
 def createArea():
     return areaController.createArea()
+
+@app.route("/areas/<areaId>")
+@login_required
+def openArea(areaId):
+    return areaController.openArea(areaId)
 
 @app.route("/auth/logout")
 @login_required

@@ -2,41 +2,34 @@
 
 {% block body %}
 
-<div id="userControl">Tervetuloa {{ username }} <a href='logout'>Kirjaudu ulos</a></div>
-<div id="messageDiv">{{ message }}</div>
+<div id="errorDiv" class="text-danger">{{ error }}</div>
+<div id="messageDiv" class="text-success">{{ message }}</div>
 <p>
-  <div>Luo uusi alue</div>
+  <div>Create a new area</div>
   <form method="POST" action="{{ url_for('createArea') }}">
     <table>
       <tr>
-	<td>
-	  {{ groupForm.name.label }}
-	</td>
-	<td>
-	  {{ groupForm.name }}
-	</td>
+        <td>
+          {{ groupForm.name.label }}
+        </td>
+        <td>
+          {{ groupForm.name(class_="form-control", onkeyup="validateAreaName()") }}
+        </td>
       </tr>
       <tr>
-	<td colspan="2">
-	  <input type="submit" value="Add a new area"/>
-	</td>
+        <td colspan="2">
+          <input id="submitAreaButton" type="submit" class="btn btn-success" value="Add a new area" disabled/>
+        </td>
       </tr>
+    </table>
   </form>
 
   {% for area in areas %}
   <tr>
-    <td>{{ area.name }}</td>
+    <td><a class="btn btn-link" href='areas/{{ area.id }}'>{{ area.name }}</a></td>
     <td>{{ area.messageCount }}</td>
   </tr>
   {% endfor %}
 
-  <form method="GET" action="{{ url_for('changePassword') }}">
-    <input type="submit" value="Change password"/>
-  </form>
-  {% if current_user.is_admin %}
-  <form method="GET" action="{{ url_for('administration') }}">
-    <input type="submit" value="Administration"/>
-  </form>
-  {% endif %}
 </p>
 {% endblock %}
