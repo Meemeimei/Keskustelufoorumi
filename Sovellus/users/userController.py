@@ -42,7 +42,7 @@ def logout():
     return loginIndex() 
 
 def changePassword():
-    form = LoginForm(request.form)
+    form = ChangePasswordForm(request.form)
     oldPassword = str(hash(form.oldPassword.data))
     newPassword = str(hash(form.password.data))
 
@@ -51,7 +51,7 @@ def changePassword():
         db.session().commit()
         return render_template("home/index.html", message="Password changed successfully")
 
-    return render_template("home/index.html", message="Password change failed")
+    return render_template("home/index.html", error="Password change failed")
 
 def changePasswordPage():
     return render_template("login/changePassword.html", form = ChangePasswordForm())

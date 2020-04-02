@@ -62,6 +62,11 @@ def deleteUser(userId):
 def createArea():
     return areaController.createArea()
 
+@app.route("/areas/delete/<areaId>", methods=["POST"])
+@login_required
+def deleteArea(areaId):
+    return areaController.deleteArea(areaId)
+
 @app.route("/areas/<areaId>")
 @login_required
 def openArea(areaId):

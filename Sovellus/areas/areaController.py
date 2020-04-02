@@ -1,9 +1,11 @@
 from flask import render_template, request, redirect
+from flask_login import current_user
 from Sovellus import db
 from Sovellus.areas.forms import AreaForm
 from Sovellus.areas.models import Area
 from Sovellus.posts.models import Post
 from Sovellus.home import homeController
+
 
 def createArea():
     form = AreaForm(request.form)
@@ -23,3 +25,13 @@ def openArea(areaId):
         return homeController.homeWithCustomError("Area not found")
 
     return render_template("area/index.html", posts=Post.query.filter(Post.area_id == areaId))
+
+def deleteArea(areaId):
+
+    if not current_user.is_admin():
+        return homeController.homeWithCustomError("You are missing user rights required for this operation")
+
+    Area.query.filter_by(id=areaId).delete()
+    db.session().commit()
+
+    return homeController.homeWithCustomMessage("Area removed successfully")

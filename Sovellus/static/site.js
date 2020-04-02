@@ -1,13 +1,36 @@
 $('document').ready(function() {
-
+  var URLparam = window.location.search.substring(1);
+  if (URLparam !== "") {
+    var paramType = URLparam.split('=')[0];
+    if (paramType === "error")
+    {
+      $("#error").html(URLparam.split('=')[1].replace(/\+/g, ' '));
+    } else if (paramType === "message") {
+      $("#message").html(URLparam.split('=')[1].replace(/\+/g, ' '));
+    }
+  }
 });
 
 function displayPassword() {
   var x = document.getElementById("password");
+  var y = document.getElementById("passwordRepeat");
+  var z = document.getElementById("oldPassword");
   if (x.type === "password") {
     x.type = "text";
+    if (y !== null) {
+      y.type = "text";
+    }
+    if (z !== null) {
+      z.type = "text";
+    }
   } else {
     x.type = "password";
+    if (y !== null) {
+      y.type = "password";
+    }
+    if (z !== null) {
+      z.type = "password";
+    }
   }
 }
 

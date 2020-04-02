@@ -4,19 +4,24 @@
 
 <div id="userControl"> <a href="javascript:returnHome()">Takaisin</a></div>
 <div id="messageDiv">{{ message }}</div>
+
+<form method="GET" action="{{ url_for('home') }}">
+  <input id="buttonInput" type="submit" class="btn btn-info" value="Back"/>
+</form>
+
 <p>
   <div>
-    Rekisteröityneet käyttäjät:
+    Registered users:
     <table>
         <tr>
-          <th>Käyttäjä</th>
+          <th>User</th>
         </tr>
         {% for user in users %}
         <tr>
           <td>
               {{ user.username }}
             <form method="POST" action="{{ url_for('deleteUser', userId=user.id) }}">
-                <input type="submit" value="Poista"/>
+                <input type="submit" class="btn btn-info" value="Delete"/>
             </form>
           </td>
         </tr>
@@ -24,13 +29,4 @@
       </table>
   </div>
 </p>
-<form id="tokenForm" method="POST" action="{{ url_for('home') }}" hidden>
-    <input id="tokenInput" name="token" value= {{ token }} />
-  </form>
-<script>
-    function returnHome() {
-        $("#tokenInput").val(sessionStorage.getItem('loginToken'));
-        $("#tokenForm")[0].submit()
-    }
-</script>
 {% endblock %}

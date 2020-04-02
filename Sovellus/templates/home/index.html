@@ -2,8 +2,8 @@
 
 {% block body %}
 
-<div id="errorDiv" class="text-danger">{{ error }}</div>
-<div id="messageDiv" class="text-success">{{ message }}</div>
+<div id="error" class="text-danger">{{ error }}</div>
+<div id="message" class="text-success">{{ message }}</div>
 <p>
   <div>Create a new area</div>
   <form method="POST" action="{{ url_for('createArea') }}">
@@ -28,6 +28,13 @@
   <tr>
     <td><a class="btn btn-link" href='areas/{{ area.id }}'>{{ area.name }}</a></td>
     <td>{{ area.messageCount }}</td>
+    <td>
+      {% if current_user.is_admin %}
+      <form method="POST" action="{{ url_for('deleteArea', areaId=area.id) }}">
+        <input type="submit" class="btn btn-info" value="Delete"/>
+      </form>
+    </td>
+    {% endif %}
   </tr>
   {% endfor %}
 
