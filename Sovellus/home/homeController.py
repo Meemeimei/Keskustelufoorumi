@@ -4,7 +4,7 @@ from Sovellus.areas.forms import AreaForm
 from Sovellus.areas.models import Area
 
 def home():
-    return render_template("home/index.html", groupForm = AreaForm(), areas=Area.query.all())
+    return render_template("home/index.html", areaForm = AreaForm(), areas=Area.query.all())
 
 def homeWithCustomMessage(message):
     return redirect(url_for("home", message = message))

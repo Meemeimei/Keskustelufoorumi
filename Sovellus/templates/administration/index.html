@@ -13,20 +13,24 @@
   <div>
     Registered users:
     <table>
-        <tr>
-          <th>User</th>
-        </tr>
-        {% for user in users %}
-        <tr>
-          <td>
-              {{ user.username }}
-            <form method="POST" action="{{ url_for('deleteUser', userId=user.id) }}">
-                <input type="submit" class="btn btn-info" value="Delete"/>
-            </form>
-          </td>
-        </tr>
-        {% endfor %}
-      </table>
+      <tr>
+        <th>User</th>
+        <th>Post count</th>
+      </tr>
+      {% for user in users %}
+      <tr>
+        <td>
+            {{ user.username }}
+          <form method="POST" action="{{ url_for('deleteUser', userId=user.id) }}">
+              <input type="submit" class="btn btn-info" value="Delete"/>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        {{ user.countMessages}}
+      </tr>
+      {% endfor %}
+    </table>
   </div>
 </p>
 {% endblock %}

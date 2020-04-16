@@ -2,6 +2,7 @@ from flask import render_template, request, redirect
 from flask_login import current_user
 from Sovellus import db
 from Sovellus.areas.forms import AreaForm
+from Sovellus.posts.forms import PostForm
 from Sovellus.areas.models import Area
 from Sovellus.posts.models import Post
 from Sovellus.home import homeController
@@ -24,7 +25,7 @@ def openArea(areaId):
     if not area:
         return homeController.homeWithCustomError("Area not found")
 
-    return render_template("area/index.html", posts=Post.query.filter(Post.area_id == areaId))
+    return render_template("area/index.html", areaId = areaId, posts=Post.query.filter(Post.area_id == areaId), postForm = PostForm())
 
 def deleteArea(areaId):
 

@@ -5,5 +5,46 @@
     <form method="GET" action="{{ url_for('home') }}">
       <input id="buttonInput" type="submit" class="btn btn-info" value="Back"/>
     </form>
+
+    <div>Create a new post</div>
+    <form method="POST" action="{{ url_for('createPost', areaId=areaId) }}">
+      <table>
+        <tr>
+          <td>
+            {{ postForm.name.label }}
+          </td>
+          <td>
+            {{ postForm.name(class_="form-control") }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ postForm.text.label }}
+          </td>
+          <td>
+            {{ postForm.text(class_="form-control") }}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input id="submitAreaButton" type="submit" class="btn btn-success" value="Post"/>
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    {% for post in posts %}
+    <tr>
+      <td><a class="btn btn-link" href='posts/{{ post.id }}'>{{ post.title }}</a></td>
+      <td>{{ post.messageCount }}</td>
+      <td>
+        {% if current_user.is_admin %}
+        <form method="POST" action="{{ url_for('deletePost', postId=post.id) }}">
+          <input type="submit" class="btn btn-info" value="Delete"/>
+        </form>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
 </p>
 {% endblock %}

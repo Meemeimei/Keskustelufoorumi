@@ -6,6 +6,8 @@ from Sovellus.users.models import User
 from Sovellus.home import homeController
 from Sovellus.administration import administrationController
 from Sovellus.areas import areaController
+from Sovellus.posts import postController
+from Sovellus.answers import answerController
 
 @app.route("/")
 @login_required
@@ -71,6 +73,26 @@ def deleteArea(areaId):
 @login_required
 def openArea(areaId):
     return areaController.openArea(areaId)
+
+@app.route("/areas/posts/<postId>")
+@login_required
+def openPost(postId):
+    return postController.openPost(postId)
+
+@app.route("/postCreation/<areaId>", methods=["POST"])
+@login_required
+def createPost(areaId):
+    return postController.createPost(areaId)
+
+@app.route("/posts/delete/<postId>", methods=["POST"])
+@login_required
+def deletePost(postId):
+    return postController.deletePost(postId)
+
+@app.route("/posts/reply/<postId>", methods=["POST"])
+@login_required
+def createAnswer(postId):
+    return answerController.createAnswer(postId)
 
 @app.route("/auth/logout")
 @login_required

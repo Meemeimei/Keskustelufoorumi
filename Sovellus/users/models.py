@@ -32,7 +32,8 @@ class User(db.Model):
         return True
 
     def is_admin(self):
-        return self.admin    
+        return self.admin
+
 
     @staticmethod
     def countMessages(accountId):
