@@ -23,7 +23,7 @@ def openPost(postId):
     if not post:
         return homeController.homeWithCustomError("Post not found")
 
-    return render_template("area/post.html", answers=Answer.query.filter(Answer.post_id == postId), answerForm = AnswerForm())
+    return render_template("area/post.html", post = post, answers=Answer.query.filter(Answer.post_id == postId), answerForm = AnswerForm())
 
 def deletePost(postId):
 

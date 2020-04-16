@@ -6,23 +6,17 @@ from Sovellus.posts.forms import PostForm
 from Sovellus.answers.models import Answer
 from Sovellus.posts.models import Post
 from Sovellus.home import homeController
+from Sovellus.posts import postController
 
 
 def createAnswer(postId):
-    form = PostForm(request.form)
-    text = form.text.data
+    form = AnswerForm(request.form)
+    text = form.content.data
 
-    post = Answer(text, current_user.id, postId)
-    db.session().add(post)
+    answer = Answer(text, current_user.id, postId)
+    db.session().add(answer)
     db.session().commit()
-    return openPost(post.id)
-
-def openPost(postId):
-    post = Post.query.filter_by(id=postId).first()
-    if not post:
-        return homeController.homeWithCustomError("Post not found")
-
-    return render_template("area/post.html", postId=postId, answers=Answer.query.filter(Answer.post_id == postId), answerForm = AnswerForm())
+    return postController.openPost(postId)
 
 def deletePost(postId):
 

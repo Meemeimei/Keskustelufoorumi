@@ -6,24 +6,17 @@
       <input id="buttonInput" type="submit" class="btn btn-info" value="Back"/>
     </form>
     <div>
-        {{ content }}
+        {{ post.content }}
     </div>
 
     {% for answer in answers %}
     <tr>
       <td>{{ answer.content }}</td>
-      <!-- <td>
-        {% if current_user.is_admin %}
-        <form method="POST" action="{{ url_for('deleteAnswer', postId=post.id) }}">
-          <input type="submit" class="btn btn-info" value="Delete"/>
-        </form> -->
-      </td>
-      {% endif %}
     </tr>
     {% endfor %}
 
     <div>Reply</div>
-    <form method="POST" action="{{ url_for('createAnswer', postId=postId) }}">
+    <form method="POST" action="{{ url_for('createAnswer', postId=post.id) }}">
       <table>
         <tr>
           <td>
