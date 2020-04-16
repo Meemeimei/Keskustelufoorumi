@@ -6,29 +6,34 @@
       <input id="buttonInput" type="submit" class="btn btn-info" value="Back"/>
     </form>
     <div>
+      {{ post.title }}
+    </div>
+    <div>
         {{ post.content }}
     </div>
 
     {% for answer in answers %}
-    <tr>
-      <td>{{ answer.content }}</td>
-    </tr>
+      <div class="reply">
+        <span>{{ answer.content }}</span>
+        <span>{{ answer.createdOn }}</span>
+      </div>
     {% endfor %}
 
-    <div>Reply</div>
-    <form method="POST" action="{{ url_for('createAnswer', postId=post.id) }}">
-      <table>
-        <tr>
-          <td>
-            {{ answerForm.content(class_="form-control") }}
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input id="submitAreaButton" type="submit" class="btn btn-success" value="Reply"/>
-          </td>
-        </tr>
-      </table>
-    </form>
+    <div id="ReplyForm"><span>Reply</span>
+      <form method="POST" action="{{ url_for('createAnswer', postId=post.id) }}">
+        <table>
+          <tr>
+            <td>
+              {{ answerForm.content(class_="form-control") }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input id="submitAreaButton" type="submit" class="btn btn-success" value="Reply"/>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
 </p>
 {% endblock %}

@@ -1,5 +1,7 @@
 from Sovellus import db
 from sqlalchemy.sql import text
+from Sovellus.posts.models import Post
+from Sovellus.answers.models import Answer
 
 class User(db.Model):
 
@@ -43,3 +45,8 @@ class User(db.Model):
         ).params(id=accountId)
         return db.engine.execute(statement)
 
+    @staticmethod
+    def getMessageCount(userId):
+        postCount = Post.query.filter(Post.user_id == userId).count()
+        answerCount = Answer.query.filter(Answer.user_id == userId).count()
+        return postCount + answerCount

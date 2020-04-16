@@ -5,6 +5,7 @@ from Sovellus.answers.forms import AnswerForm
 from Sovellus.posts.forms import PostForm
 from Sovellus.answers.models import Answer
 from Sovellus.posts.models import Post
+from Sovellus.users.models import User
 from Sovellus.home import homeController
 from Sovellus.posts import postController
 
@@ -16,10 +17,12 @@ def createAnswer(postId):
     answer = Answer(text, current_user.id, postId)
     db.session().add(answer)
     db.session().commit()
+
+    updatePostCounts(postId)
+
     return postController.openPost(postId)
 
 def deletePost(postId):
-
     if not current_user.is_admin():
         return homeController.homeWithCustomError("You are missing user rights required for this operation")
 
@@ -27,3 +30,12 @@ def deletePost(postId):
     db.session().commit()
 
     return homeController.homeWithCustomMessage("Post removed successfully")
+
+def updatePostCounts(postId):
+    post = Post.query.filter_by(id=postId).first()
+    post.messageCount = Post.getMessageCount(postId)
+
+    user = User.query.filter_by(id=current_user.id).first()
+    user.messageCount = User.getMessageCount(current_user.id)
+
+    db.session().commit()

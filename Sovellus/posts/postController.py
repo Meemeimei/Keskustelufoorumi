@@ -5,6 +5,8 @@ from Sovellus.answers.forms import AnswerForm
 from Sovellus.posts.forms import PostForm
 from Sovellus.answers.models import Answer
 from Sovellus.posts.models import Post
+from Sovellus.areas.models import Area
+from Sovellus.users.models import User
 from Sovellus.home import homeController
 
 
@@ -16,6 +18,7 @@ def createPost(areaId):
     post = Post(name, text, current_user.id, areaId)
     db.session().add(post)
     db.session().commit()
+
     return openPost(post.id)
 
 def openPost(postId):
@@ -23,7 +26,7 @@ def openPost(postId):
     if not post:
         return homeController.homeWithCustomError("Post not found")
 
-    return render_template("area/post.html", post = post, answers=Answer.query.filter(Answer.post_id == postId), answerForm = AnswerForm())
+    return render_template("area/post.html", post = post, answers=Post.getRelatedAnswers(postId), answerForm = AnswerForm())
 
 def deletePost(postId):
 
@@ -34,3 +37,12 @@ def deletePost(postId):
     db.session().commit()
 
     return homeController.homeWithCustomMessage("Post removed successfully")
+
+def updatePostCounts(areaId):
+    area = Area.query.filter_by(id=areaId).first()
+    area.postCount = Area.getMessageCount(areaId)
+
+    user = User.query.filter_by(id=current_user.id).first()
+    user.postCount = User.getMessageCount(current_user.id)
+
+    db.session().commit()
