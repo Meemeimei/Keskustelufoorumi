@@ -30,4 +30,4 @@ class Post(db.Model):
 
     @staticmethod
     def getRelatedAnswers(postId):
-        return Answer.query.filter(Answer.post_id == postId).order_by(Answer.createdOn.desc())
+        return Answer.query.filter(Answer.post_id == postId).order_by(Answer.createdOn.asc())
