@@ -30,5 +30,5 @@
 [x] Ylläpitäjänä haluan poistaa aiheita, ryhmiä ja viestejä
 	DELETE FROM Area/Post/Group Where id = poistettavanId
 
-[x] Ylläpitäjänä haluan tehdä käyttäjistä ylläpitäjiä
+[] Ylläpitäjänä haluan tehdä käyttäjistä ylläpitäjiä
 	UPDATE Account SET admin = True Where user_id = päivitettävänTunnuksenId
