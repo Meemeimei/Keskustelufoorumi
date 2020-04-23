@@ -11,11 +11,10 @@ class Post(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('account.id'),
         nullable=False)
-    area_id = db.Column(db.Integer, db.ForeignKey('area.id'),
-        nullable=False)
+    area_id = db.Column(db.Integer, db.ForeignKey('area.id'))
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'))
 
-    def __init__(self, title, content, user_id, area_id):
+    def __init__(self, title, content, user_id, area_id, group_id):
         self.title = title
         self.content = content
         self.user_id = user_id

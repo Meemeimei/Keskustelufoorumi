@@ -62,3 +62,11 @@ function validateAreaName() {
     $("#submitAreaButton")[0].disabled = true;
   }
 }
+
+function validateGroupName() {
+  if ($("#name").val() !== "") {
+    $("#submitGroupButton")[0].disabled = false;
+  } else {
+    $("#submitGroupButton")[0].disabled = true;
+  }
+}

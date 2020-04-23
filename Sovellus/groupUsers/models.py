@@ -8,6 +8,6 @@ class Groupuser(db.Model):
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'),
         nullable=False)
 
-    def __init__(self, name):
-        self.name = name
-        self.done = False
+    def __init__(self, userId, groupId):
+        self.user_id = userId
+        self.group_id = groupId

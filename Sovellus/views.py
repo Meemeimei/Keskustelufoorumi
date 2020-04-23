@@ -8,6 +8,7 @@ from Sovellus.administration import administrationController
 from Sovellus.areas import areaController
 from Sovellus.posts import postController
 from Sovellus.answers import answerController
+from Sovellus.groups import groupController
 
 @app.route("/")
 @login_required
@@ -84,6 +85,11 @@ def openPost(postId):
 def createPost(areaId):
     return postController.createPost(areaId)
 
+@app.route("/groupPostCreation/<groupId>", methods=["POST"])
+@login_required
+def createGroupPost(groupId):
+    return postController.createPost(groupId)
+
 @app.route("/posts/delete/<postId>", methods=["POST"])
 @login_required
 def deletePost(postId):
@@ -93,6 +99,26 @@ def deletePost(postId):
 @login_required
 def createAnswer(postId):
     return answerController.createAnswer(postId)
+
+@app.route("/groups/create", methods=["POST"])
+@login_required
+def createGroup():
+    return groupController.createGroup()
+
+@app.route("/groups/<groupId>")
+@login_required
+def openGroup(groupId):
+    return groupController.openGroup(groupId)
+
+@app.route("/groups/delete/<groupId>", methods=["POST"])
+@login_required
+def deleteGroup(groupId):
+    return groupController.deleteGroup(groupId)
+
+@app.route("/groups/createPost/<groupId>", methods=["POST"])
+@login_required
+def newGroupPost(groupId):
+    return postController.newGroupPost(groupId)
 
 @app.route("/auth/logout")
 @login_required

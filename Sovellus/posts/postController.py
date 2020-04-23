@@ -8,6 +8,7 @@ from Sovellus.posts.models import Post
 from Sovellus.areas.models import Area
 from Sovellus.users.models import User
 from Sovellus.home import homeController
+from Sovellus.groups import groupController
 
 
 def createPost(areaId):
@@ -15,7 +16,18 @@ def createPost(areaId):
     name = form.name.data
     text = form.text.data
 
-    post = Post(name, text, current_user.id, areaId)
+    post = Post(name, text, current_user.id, areaId, None)
+    db.session().add(post)
+    db.session().commit()
+
+    return openPost(post.id)
+
+def createGroupPost(groupId):
+    form = PostForm(request.form)
+    name = form.name.data
+    text = form.text.data
+
+    post = Post(name, text, current_user.id, None, groupId)
     db.session().add(post)
     db.session().commit()
 
@@ -23,6 +35,9 @@ def createPost(areaId):
 
 def openPost(postId):
     post = Post.query.filter_by(id=postId).first()
+    if (post.group_id is not None):
+        if not groupController.canSeeGroupPost(post.groupId, current_user.id):
+            return homeController.homeWithCustomError("Unauthorized")
     if not post:
         return homeController.homeWithCustomError("Post not found")
 
@@ -46,3 +61,14 @@ def updatePostCounts(areaId):
     user.postCount = User.getMessageCount(current_user.id)
 
     db.session().commit()
+
+def newGroupPost(groupId):
+    form = PostForm(request.form)
+    name = form.name.data
+    text = form.text.data
+
+    post = Post(name, text, current_user.id, None, groupId)
+    db.session().add(post)
+    db.session().commit()
+
+    return openPost(post.id)

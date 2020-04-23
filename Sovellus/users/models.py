@@ -12,6 +12,8 @@ class User(db.Model):
     password = db.Column(db.String(144), nullable=False)
     admin = db.Column(db.Boolean, nullable=False)
 
+    groupusers = db.relationship("Groupuser", backref='account', lazy=True)
+
     def __init__(self, username, password):
         self.username = username
         self.password = password
@@ -44,6 +46,16 @@ class User(db.Model):
                         "(SELECT COUNT (*) FROM Answer WHERE User_id = :id)"
         ).params(id=accountId)
         return db.engine.execute(statement)
+
+    @staticmethod
+    def getGroups(userId):
+
+        stmt = text("SELECT g.id, g.name "
+            " FROM \"group\" g, account u, groupuser gu"
+            " WHERE gu.user_id = :userId AND g.id = gu.group_id").params(userId=userId)
+            
+        res = db.engine.execute(stmt)
+        return [{"id": row[0], "name": row[1]} for row in res]
 
     @staticmethod
     def getMessageCount(userId):
