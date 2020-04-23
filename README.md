@@ -14,7 +14,7 @@ Toimintoja:
 
 Kirjautuminen, Kirjoituksen lisääminen, Kirjoitusten näyttäminen eri kriteerein, Ryhmän jäsenen lisääminen, muokkaaminen ja poistaminen, Vastineen laatiminen ja muokkaus, Kirjoitusten poistaminen, Aiheiden määrittely, muokkaus ja poisto.
 
-[User storyt](../master/Dokumentaatio/UserStoryt.md)
+[User storyt ja niiden SQL-lauseet](../master/Dokumentaatio/UserStoryt.md)
 
 Tietokantakaavio:
 
