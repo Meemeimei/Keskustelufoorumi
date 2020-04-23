@@ -1,21 +1,23 @@
 ### User storyt
 
-Käyttäjänä haluan rekisteröityä foorumille
+[x] Käyttäjänä haluan rekisteröityä foorumille
 
-Käyttäjänä haluan voida kirjautua rekisteröimilläni tunnuksilla foorumille
+[x] Käyttäjänä haluan voida kirjautua rekisteröimilläni tunnuksilla foorumille
 
-Käyttäjänä haluan aloittaa keskusteluita foorumille
+[x] Käyttäjänä haluan aloittaa keskusteluita foorumille
 
-Käyttäjänä haluan lisätä käyttäjiä ryhmiini
+[x] Käyttäjänä haluan luoda uusia alueita
 
-Käyttäjänä haluan nähdä ryhmäni aloitukset
+[] Käyttäjänä haluan lisätä käyttäjiä ryhmiini
 
-Käyttäjänä haluan vastata aloituksiin
+[x] Käyttäjänä haluan nähdä ryhmäni aloitukset
 
-Käyttäjänä haluan vaihtaa salasanaani tarvittaessa
+[x] Käyttäjänä haluan vastata aloituksiin
 
-Ylläpitäjänä haluan poistaa tunnuksia
+[x] Käyttäjänä haluan vaihtaa salasanaani tarvittaessa
 
-Ylläpitäjänä haluan poistaa aiheita, ryhmiä ja viestejä
+[x] Ylläpitäjänä haluan poistaa tunnuksia
 
-Ylläpitäjänä haluan tehdä käyttäjistä ylläpitäjiä
+[x] Ylläpitäjänä haluan poistaa aiheita, ryhmiä ja viestejä
+
+[x] Ylläpitäjänä haluan tehdä käyttäjistä ylläpitäjiä
