@@ -60,6 +60,16 @@ def administration():
 def deleteUser(userId):
     return administrationController.deleteUser(userId)
 
+@app.route("/administration/addAdmin/<userId>/", methods=["POST"])
+@login_required
+def addAdmin(userId):
+    return administrationController.addAdminRights(userId)
+
+@app.route("/administration/removeAdmin/<userId>/", methods=["POST"])
+@login_required
+def removeAdmin(userId):
+    return administrationController.removeAdminRights(userId)
+
 @app.route("/areaCreation", methods=["POST"])
 @login_required
 def createArea():

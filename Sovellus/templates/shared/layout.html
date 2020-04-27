@@ -17,7 +17,7 @@
         <form method="GET" action="{{ url_for('changePassword') }}">
           <input id="buttonInput" type="submit" class="btn btn-info" value="Change password"/>
         </form>
-        {% if current_user.is_admin %}
+        {% if current_user.admin == True %}
         <form method="GET" action="{{ url_for('administration') }}">
           <input id="buttonInput" type="submit" class="btn btn-info" value="Administration"/>
         </form>

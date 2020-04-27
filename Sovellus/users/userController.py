@@ -26,6 +26,8 @@ def login():
 def register():
     form = LoginForm(request.form)
     username = form.username.data
+    # By no means a secure way to save password
+    # simply used to at least make the passwords non-human readable
     password = str(hash(form.password.data))
     
     user = User.query.filter_by(username=username).first()

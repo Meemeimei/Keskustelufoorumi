@@ -30,7 +30,7 @@ def openGroup(groupId):
     group = Group.query.filter_by(id=groupId).first()
     if not group:
         return homeController.homeWithCustomError("Group doesn't exist or you don't have access to it")
-    groupuser = Groupuser.query.filter_by(user_id=current_user.id, group_id=group.id)
+    groupuser = Groupuser.query.filter_by(user_id=current_user.id, group_id=group.id).first()
     if not groupuser:
         return homeController.homeWithCustomError("Group doesn't exist or you don't have access to it")
 

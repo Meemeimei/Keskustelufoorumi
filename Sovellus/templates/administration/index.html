@@ -2,7 +2,6 @@
 
 {% block body %}
 
-<div id="userControl"> <a href="javascript:returnHome()">Takaisin</a></div>
 <div id="messageDiv">{{ message }}</div>
 
 <form method="GET" action="{{ url_for('home') }}">
@@ -20,10 +19,20 @@
       {% for user in users %}
       <tr>
         <td>
-            {{ user.username }}
+          {{ user.username }}
           <form method="POST" action="{{ url_for('deleteUser', userId=user.id) }}">
               <input type="submit" class="btn btn-info" value="Delete"/>
           </form>
+          {% if user.admin == False %}
+          <form method="POST" action="{{ url_for('addAdmin', userId=user.id) }}">
+            <input type="submit" class="btn btn-info" value="Make Admin"/>
+          </form>
+          {% endif %}
+          {% if user.admin == True %}
+          <form method="POST" action="{{ url_for('removeAdmin', userId=user.id) }}">
+            <input type="submit" class="btn btn-info" value="Remove Admin"/>
+          </form>
+          {% endif %}
         </td>
       </tr>
       <tr>

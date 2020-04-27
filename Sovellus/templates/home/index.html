@@ -29,7 +29,7 @@
     <td><a class="btn btn-link" href='areas/{{ area.id }}'>{{ area.name }}</a></td>
     <td>{{ area.messageCount }}</td>
     <td>
-      {% if current_user.is_admin %}
+      {% if current_user.is_admin == True %}
       <form method="POST" action="{{ url_for('deleteArea', areaId=area.id) }}">
         <input type="submit" class="btn btn-info" value="Delete"/>
       </form>
