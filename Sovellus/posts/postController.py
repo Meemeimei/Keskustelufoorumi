@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect
 from flask_login import current_user
 from Sovellus import db
-from Sovellus.answers.forms import AnswerForm
+from Sovellus.answers.forms import AnswerForm, EditForm
 from Sovellus.posts.forms import PostForm
 from Sovellus.answers.models import Answer
 from Sovellus.posts.models import Post
@@ -41,7 +41,7 @@ def openPost(postId):
     if not post:
         return homeController.homeWithCustomError("Post not found")
 
-    return render_template("area/post.html", post = post, answers=Post.getRelatedAnswers(postId), answerForm = AnswerForm())
+    return render_template("area/post.html", post = post, answers=Post.getRelatedAnswers(postId), answerForm = AnswerForm(), editForm = EditForm())
 
 def deletePost(postId):
 

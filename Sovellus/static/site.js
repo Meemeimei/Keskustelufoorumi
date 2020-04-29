@@ -70,3 +70,9 @@ function validateGroupName() {
     $("#submitGroupButton")[0].disabled = true;
   }
 }
+
+function displayEdit(selection) {
+  $("#hide"+selection)[0].hidden = true;
+  $("#show"+selection)[0].hidden = false;
+  $("#edit"+selection).val($("#content"+selection));
+}

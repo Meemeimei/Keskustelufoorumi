@@ -13,9 +13,28 @@
     </div>
 
     {% for answer in answers %}
-      <div class="reply">
-        <span>{{ answer.content }}</span>
+      <div class="reply" id="hide{{ answer.id }}">
+        <span id="content{{ answer.id }}">{{ answer.content }}</span>
         <span>{{ answer.createdOn }}</span>
+        {% if answer.user_id == current_user.id %}
+        <button class="btn btn-info" onclick="displayEdit('{{ answer.id }}')">Edit</button>
+        {% endif %}
+      </div>
+      <div id="show{{ answer.id }}" id="editForm" hidden>
+        <form method="POST" action="{{ url_for('editAnswer', answerId=answer.id) }}">
+          <table>
+            <tr>
+              <td>
+                {{ editForm.content(class_="form-control") }}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input id="submitAreaButton" type="submit" class="btn btn-success" value="Edit"/>
+              </td>
+            </tr>
+          </table>
+        </form>
       </div>
     {% endfor %}
 

@@ -2,6 +2,10 @@ body {
     background-image: url("grey.png");
 }
 
+.postForm {
+    display: inline-block;
+}
+
 #userControl {
     position: absolute;
     top: 5px;
@@ -19,4 +23,8 @@ body {
 
 #ReplyForm {
     padding-top: 10px;
+}
+
+#centerDiv {
+    text-align: center;
 }

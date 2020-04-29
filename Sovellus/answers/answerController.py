@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect
 from flask_login import current_user
 from Sovellus import db
-from Sovellus.answers.forms import AnswerForm
+from Sovellus.answers.forms import AnswerForm, EditForm
 from Sovellus.posts.forms import PostForm
 from Sovellus.answers.models import Answer
 from Sovellus.posts.models import Post
@@ -21,6 +21,17 @@ def createAnswer(postId):
     updatePostCounts(postId)
 
     return postController.openPost(postId)
+
+def editAnswer(answerId):
+    form = EditForm(request.form)
+    text = form.content.data
+
+    answer = Answer.query.filter_by(id = answerId).first()
+
+    answer.content = text
+    db.session().commit()
+
+    return postController.openPost(answer.post_id)
 
 def deletePost(postId):
     if not current_user.is_admin():

@@ -110,6 +110,11 @@ def deletePost(postId):
 def createAnswer(postId):
     return answerController.createAnswer(postId)
 
+@app.route("/posts/edit/<answerId>", methods=["POST"])
+@login_required
+def editAnswer(answerId):
+    return answerController.editAnswer(answerId)
+
 @app.route("/groups/create", methods=["POST"])
 @login_required
 def createGroup():
