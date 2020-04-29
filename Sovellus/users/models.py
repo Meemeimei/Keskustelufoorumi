@@ -10,6 +10,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
+    messageCount = db.Column(db.Integer)
     admin = db.Column(db.Boolean, nullable=False)
 
     groupusers = db.relationship("Groupuser", backref='account', lazy=True)
@@ -17,6 +18,7 @@ class User(db.Model):
     def __init__(self, username, password):
         self.username = username
         self.password = password
+        self.messageCount = 0
         if (username == "admin"):
             self.admin = True
         else:
@@ -38,18 +40,8 @@ class User(db.Model):
     def is_admin(self):
         return self.admin
 
-
-    @staticmethod
-    def countMessages(accountId):
-        statement = text("SELECT "
-                        "(SELECT COUNT(*) FROM Post WHERE User_id = :id) + "
-                        "(SELECT COUNT (*) FROM Answer WHERE User_id = :id)"
-        ).params(id=accountId)
-        return db.engine.execute(statement)
-
     @staticmethod
     def getGroups(userId):
-
         stmt = text("SELECT g.id, g.name "
             " FROM \"group\" g, account u, groupuser gu"
             " WHERE gu.user_id = :userId AND g.id = gu.group_id").params(userId=userId)
@@ -59,6 +51,12 @@ class User(db.Model):
 
     @staticmethod
     def getMessageCount(userId):
-        postCount = Post.query.filter(Post.user_id == userId).count()
-        answerCount = Answer.query.filter(Answer.user_id == userId).count()
+        stmt = text("SELECT COUNT (*) FROM Post"
+            " WHERE Post.user_id = :userId").params(userId=userId)
+        postCount = db.engine.execute(stmt)
+
+        stmt = text("SELECT COUNT (*) FROM Answer"
+            " WHERE Answer.user_id = :userId").params(userId=userId)
+        answerCount = db.engine.execute(stmt)
+
         return postCount + answerCount

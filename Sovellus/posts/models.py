@@ -1,4 +1,5 @@
 from Sovellus import db
+from sqlalchemy.sql import text
 from Sovellus.answers.models import Answer
 import datetime
 
@@ -25,8 +26,16 @@ class Post(db.Model):
 
     @staticmethod
     def getMessageCount(postId):
-        return Answer.query.filter(Answer.post_id == postId).count()
+        stmt = text("SELECT COUNT (*) FROM Answer"
+                     " WHERE Answer.post_id = :postId").params(postId=postId)
+        res = db.engine.execute(stmt)
+
+        return res
 
     @staticmethod
     def getRelatedAnswers(postId):
-        return Answer.query.filter(Answer.post_id == postId).order_by(Answer.createdOn.asc())
+        stmt = text("SELECT * FROM Answer"
+            " WHERE (Answer.post_id = :postId) ORDER BY Answer.createdOn ASC").params(postId=postId)
+        res = db.engine.execute(stmt)
+        
+        return res

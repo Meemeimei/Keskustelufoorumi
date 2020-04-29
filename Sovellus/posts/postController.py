@@ -58,7 +58,7 @@ def updatePostCounts(areaId):
     area.postCount = Area.getMessageCount(areaId)
 
     user = User.query.filter_by(id=current_user.id).first()
-    user.postCount = User.getMessageCount(current_user.id)
+    user.messageCount = User.getMessageCount(current_user.id)
 
     db.session().commit()
 

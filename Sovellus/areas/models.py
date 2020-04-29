@@ -1,4 +1,5 @@
 from Sovellus import db
+from sqlalchemy.sql import text
 from Sovellus.posts.models import Post
 
 class Area(db.Model):
@@ -12,4 +13,8 @@ class Area(db.Model):
 
     @staticmethod
     def getMessageCount(areaId):
-        return Post.query.filter(Post.area_id == areaId).count()
+        stmt = text("SELECT COUNT (*) FROM Post"
+            " WHERE Post.area_id = :areaId").params(areaId=areaId)
+        res = db.engine.execute(stmt)
+
+        return res
