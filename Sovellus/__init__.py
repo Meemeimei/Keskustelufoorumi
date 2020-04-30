@@ -2,6 +2,7 @@ from flask import Flask
 app = Flask(__name__)
 
 from flask_sqlalchemy import SQLAlchemy
+from Sovellus.users.models import User
 
 import os
 
@@ -33,7 +34,7 @@ login_manager.init_app(app)
 login_manager.login_view = "login"
 login_manager.login_message = "Please login to use this functionality."
 
-from Sovellus.users.models import User
+
 
 @login_manager.user_loader
 def load_user(user_id):
