@@ -15,7 +15,7 @@ def registerIndex():
 def login():
     form = LoginForm(request.form)
 
-    user = User.query.filter_by(username=form.username.data, password=str(hash(form.password.data))).first()
+    user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
     if not user:
         return render_template("login/index.html", form = form,
                                error = "No such username or password")
@@ -30,9 +30,7 @@ def register():
         return registerIndex()
 
     username = form.username.data
-    # By no means a secure way to save password
-    # simply used to at least make the passwords non-human readable
-    password = str(hash(form.password.data))
+    password = form.password.data
     
     user = User.query.filter_by(username=username).first()
     if user:
@@ -51,8 +49,8 @@ def changePassword():
     form = ChangePasswordForm(request.form)
     if not form.validate():
         return changePasswordPage()
-    oldPassword = str(hash(form.oldPassword.data))
-    newPassword = str(hash(form.password.data))
+    oldPassword = form.oldPassword.data
+    newPassword = form.password.data
 
     if (current_user.password == oldPassword):
         current_user.password = newPassword
