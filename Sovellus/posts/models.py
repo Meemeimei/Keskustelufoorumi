@@ -33,7 +33,7 @@ class Post(db.Model):
     @staticmethod
     def getRelatedAnswers(postId):
         stmt = text("SELECT * FROM Answer"
-            " WHERE (Answer.post_id = :postId) ORDER BY Answer.createdOn ASC").params(postId=postId)
+            " WHERE (Answer.post_id = :postId) ORDER BY answer.createdOn ASC").params(postId=postId)
         res = db.engine.execute(stmt)
         
         return res
