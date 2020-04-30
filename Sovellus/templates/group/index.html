@@ -65,6 +65,12 @@
             </td>
           </tr>
         </table>
+        {% for error in postForm.name.errors %}
+        <li>{{ error }}</li>
+      {% endfor %}</td>
+      {% for error in postForm.text.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}</td>
       </form>
     </div>
 

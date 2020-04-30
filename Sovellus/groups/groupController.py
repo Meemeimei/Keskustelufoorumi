@@ -12,6 +12,8 @@ from Sovellus.home import homeController
 
 def createGroup():
     form = GroupForm(request.form)
+    if not form.validate():
+        return homeController.home()
     name = form.name.data
     group = Group.query.filter_by(name=name).first()
     if group:
@@ -61,6 +63,10 @@ def addUserToGroup(groupId):
         return homeController.homeWithCustomError("You need to be a member in the group to complete this operation")
 
     form = AddUserToGroupForm(request.form)
+    if not form.validate():
+        return homeController.home()
+
+
     username = form.username.data
 
     user = User.query.filter_by(username=username).first()

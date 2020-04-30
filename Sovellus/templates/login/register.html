@@ -37,7 +37,13 @@
         </td>
       </tr>
       <tr>
-        <td></td>
+        <td>      
+          {% for error in form.username.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+          {% for error in form.password.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}</td>
         <td>
           <div>
             <input type="checkbox" class="form-check-input" onclick="displayPassword()"><span>Display password</span>

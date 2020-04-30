@@ -22,6 +22,9 @@
               <input id="submitAreaButton" type="submit" class="btn btn-success" value="Add a new area" disabled/>
             </td>
           </tr>
+          {% for error in areaForm.name.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}</td>
         </table>
       </form>
       <table>
@@ -61,6 +64,9 @@
             </td>
           </tr>
         </table>
+        {% for error in groupForm.name.errors %}
+        <li>{{ error }}</li>
+      {% endfor %}</td>
       </form>
 
 

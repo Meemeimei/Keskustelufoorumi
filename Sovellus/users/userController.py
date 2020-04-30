@@ -25,6 +25,10 @@ def login():
 
 def register():
     form = LoginForm(request.form)
+
+    if not form.validate():
+        return registerIndex()
+
     username = form.username.data
     # By no means a secure way to save password
     # simply used to at least make the passwords non-human readable
@@ -45,6 +49,8 @@ def logout():
 
 def changePassword():
     form = ChangePasswordForm(request.form)
+    if not form.validate():
+        return changePasswordPage()
     oldPassword = str(hash(form.oldPassword.data))
     newPassword = str(hash(form.password.data))
 

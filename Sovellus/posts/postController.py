@@ -9,10 +9,13 @@ from Sovellus.areas.models import Area
 from Sovellus.users.models import User
 from Sovellus.home import homeController
 from Sovellus.groups import groupController
+from Sovellus.areas import areaController
 
 
 def createPost(areaId):
     form = PostForm(request.form)
+    if not form.validate():
+        return areaController.openArea(areaId)
     name = form.name.data
     text = form.text.data
 
@@ -21,17 +24,6 @@ def createPost(areaId):
     db.session().commit()
 
     updatePostCounts(areaId)
-
-    return openPost(post.id)
-
-def createGroupPost(groupId):
-    form = PostForm(request.form)
-    name = form.name.data
-    text = form.text.data
-
-    post = Post(name, text, current_user.id, None, groupId)
-    db.session().add(post)
-    db.session().commit()
 
     return openPost(post.id)
 
@@ -74,6 +66,8 @@ def updatePostCounts(areaId):
 
 def newGroupPost(groupId):
     form = PostForm(request.form)
+    if not form.validate():
+        return groupController.openGroup(groupId)
     name = form.name.data
     text = form.text.data
 

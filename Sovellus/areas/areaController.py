@@ -10,6 +10,8 @@ from Sovellus.home import homeController
 
 def createArea():
     form = AreaForm(request.form)
+    if not form.validate():
+        return homeController.home()
     name = form.name.data
     area = Area.query.filter_by(name=name).first()
     if area:

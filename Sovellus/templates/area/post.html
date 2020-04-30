@@ -7,8 +7,9 @@
       <input id="buttonInput" type="submit" class="btn btn-info" value="Home"/>
     </form>
     <div>
-      {{ post.title }}
+      Title: {{ post.title }}
     </div>
+    <div>Message:</div>
     <div>
         {{ post.content }}
     </div>
@@ -58,6 +59,9 @@
             </td>
           </tr>
         </table>
+        {% for error in answerForm.content.errors %}
+        <li>{{ error }}</li>
+      {% endfor %}</td>
       </form>
     </div>
 </p>
