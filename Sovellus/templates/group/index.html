@@ -7,6 +7,38 @@
     </form>
     <div>welcome to {{ GroupName }} group area</div>
 
+    <div id="ReplyForm" class="container"><span>Add user with username</span>
+      <form method="POST" action="{{ url_for('addUserToGroup', groupId=group.id) }}">
+        <table>
+          <tr>
+            <td>
+              {{ AddUserToGroupForm.username(class_="form-control") }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input id="submitAreaButton" type="submit" class="btn btn-success" value="Add"/>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <div>Current users:</div>
+      <table>
+        <div>
+          {% for user in users %}
+          <tr class="container">
+            <td>{{ user.username }}</td>
+            <td>
+              <form method="POST" action="{{ url_for('removeUserFromGroup', groupId=group.id, userId=user.id) }}">
+                <input type="submit" class="btn btn-info" value="Delete"/>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </div>
+      </table>
+    </div>
+
     <div class="container">
       <div>Create a new post</div>
       <form method="POST" action="{{ url_for('createGroupPost', groupId=group.id) }}">

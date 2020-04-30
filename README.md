@@ -1,6 +1,6 @@
 # Keskustelufoorumi
 
-Tarkoituksena on luoda keskustelufoorumi tietokantojen harjoitustyökurssille. Käyttäjät voivat kirjautumisen jälkeen osallistua keskusteluun lukemalla ja lähettämällä viestejä. Viestit voidaan myös kohdistaa tiettyihin viesteihin. Sivulla on myös hakutoiminto. Ylläpitäjillä on oma alue keskustelufoorumin hallintaan.
+Tarkoituksena on luoda keskustelufoorumi tietokantojen harjoitustyökurssille. Käyttäjät voivat kirjautumisen jälkeen osallistua keskusteluun lukemalla ja lähettämällä viestejä. Viestit lähetetään keskustelijoiden näkökulmasta anonyymeinä. Viestit voidaan myös kohdistaa tiettyihin Aloituksiin. Sivulla on myös hakutoiminto. Ylläpitäjillä on oma alue keskustelufoorumin hallintaan.
 
 [Herokulinkki](https://cryptic-temple-28944.herokuapp.com/login "cryptic-temple-28944.herokuapp.com")
 
@@ -17,6 +17,17 @@ Kirjautuminen, Kirjoituksen lisääminen, Kirjoitusten näyttäminen eri kriteer
 [Asennusohje](../master/Dokumentaatio/Asennusohje.md)
 
 [Käyttöohjeet](../master/Dokumentaatio/Käyttöohjeet.md)
+
+[Create Table -lauseet](../master/Dokumentaatio/CreateTable-Lauseet.md)
+
+
+Jatkokehitysideoita:
+ - Sovelluksen ulkonäkö jäi keskeneräiseksi ja olisi kaivannut siistimistä
+ - Etusivulla lista uusimmista viesteistä ja suora linkki niihin
+ - Mahdollisuus lisätä kuvaus alueille
+ - Mahdollisuus liputtaa viestejä ja ylläpitäjilläe näkymä liputetuista viesteistä
+ - "tykkäysmahdollisuus" viesteihin ja aloituksiin
+
 
 Tietokantakaavio:
 

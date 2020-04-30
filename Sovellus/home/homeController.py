@@ -5,8 +5,11 @@ from Sovellus.areas.forms import AreaForm
 from Sovellus.groups.forms import GroupForm
 from Sovellus.areas.models import Area
 from Sovellus.users.models import User
+from Sovellus.groups.models import Group
 
 def home():
+    if (current_user.admin):
+        return render_template("home/index.html", areaForm = AreaForm(), groupForm = GroupForm(), areas=Area.query.all(), groups=Group.query.all())
     return render_template("home/index.html", areaForm = AreaForm(), groupForm = GroupForm(), areas=Area.query.all(), groups=User.getGroups(current_user.id))
 
 def homeWithCustomMessage(message):

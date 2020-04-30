@@ -130,6 +130,16 @@ def openGroup(groupId):
 def deleteGroup(groupId):
     return groupController.deleteGroup(groupId)
 
+@app.route("/groups/addUser/<groupId>", methods=["POST"])
+@login_required
+def addUserToGroup(groupId):
+    return groupController.addUserToGroup(groupId)
+
+@app.route("/groups/removeUser/<groupId>/<userId>", methods=["POST"])
+@login_required
+def removeUserFromGroup(groupId, userId):
+    return groupController.removeUserFromGroup(groupId, userId)
+
 @app.route("/auth/logout")
 @login_required
 def auth_logout():

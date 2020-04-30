@@ -24,10 +24,10 @@
           </tr>
         </table>
       </form>
-
+      <table>
+        <div>
       {% for area in areas %}
-      <div>
-        <tr>
+        <tr class="container">
           <td><a class="btn btn-link" href='areas/{{ area.id }}'>{{ area.name }}</a></td>
           <td>{{ area.messageCount }}</td>
           {% if current_user.admin %}
@@ -40,6 +40,8 @@
         </tr>
       </div>
       {% endfor %}
+    </table>
+
     </div>
     <div class="container">
       <div>Create a new group</div>
@@ -61,22 +63,24 @@
         </table>
       </form>
 
-      {% for group in groups %}
-      <div>
-      <tr>
-        <td><a class="btn btn-link" href='groups/{{ group.id }}'>{{ group.name }}</a></td>
-        {% if current_user.is_admin %}
-        <td>
-          <form method="POST" action="{{ url_for('deleteGroup', groupId=group.id) }}">
-            <input type="submit" class="btn btn-info" value="Delete"/>
-          </form>
-        </td>
-        {% endif %}
-      </tr>
-    {% endfor %}
+
+      <table>
+        <div>
+          {% for group in groups %}
+          <tr class="container">
+            <td><a class="btn btn-link" href='groups/{{ group.id }}'>{{ group.name }}</a></td>
+            {% if current_user.admin %}
+            <td>
+              <form method="POST" action="{{ url_for('deleteGroup', groupId=group.id) }}">
+                <input type="submit" class="btn btn-info" value="Delete"/>
+              </form>
+            </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        </div>
+      </table>
     </div>
-  </div>
   </p>
-  
 </div>
 {% endblock %}

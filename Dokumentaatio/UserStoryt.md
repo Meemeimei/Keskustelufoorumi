@@ -12,7 +12,7 @@
 [x] Käyttäjänä haluan luoda uusia alueita
 	INSERT INTO Area name, content VALUES ...
 
-[] Käyttäjänä haluan lisätä käyttäjiä ryhmiini
+[x] Käyttäjänä haluan lisätä käyttäjiä ryhmiini
 	INSERT INTO Groupuser group_id, user_id VALUES ...
 
 [x] Käyttäjänä haluan nähdä ryhmäni aloitukset
@@ -30,5 +30,5 @@
 [x] Ylläpitäjänä haluan poistaa aiheita, ryhmiä ja viestejä
 	DELETE FROM Area/Post/Group Where id = poistettavanId
 
-[] Ylläpitäjänä haluan tehdä käyttäjistä ylläpitäjiä
+[x] Ylläpitäjänä haluan tehdä käyttäjistä ylläpitäjiä
 	UPDATE Account SET admin = True Where user_id = päivitettävänTunnuksenId

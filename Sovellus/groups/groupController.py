@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect
 from flask_login import current_user
 from Sovellus import db
-from Sovellus.groups.forms import GroupForm
+from Sovellus.groups.forms import GroupForm, AddUserToGroupForm
 from Sovellus.posts.forms import PostForm
 from Sovellus.posts.models import Post
 from Sovellus.groups.models import Group
@@ -34,7 +34,7 @@ def openGroup(groupId):
     if not groupuser and not current_user.admin:
         return homeController.homeWithCustomError("Group doesn't exist or you don't have access to it")
 
-    return render_template("group/index.html", group = group, posts=Post.query.filter(Post.group_id == group.id), postForm = PostForm())
+    return render_template("group/index.html", group = group, posts=Post.query.filter(Post.group_id == group.id), postForm = PostForm(), AddUserToGroupForm = AddUserToGroupForm(), users = Group.getUsers(groupId))
 
 def deleteGroup(groupId):
 
@@ -56,9 +56,13 @@ def canSeeGroupPost(groupId, userId):
 
     return True
 
-def addUserToGroup(groupId, username):
+def addUserToGroup(groupId):
     if not canSeeGroupPost(groupId, current_user.id):
         return homeController.homeWithCustomError("You need to be a member in the group to complete this operation")
+
+    form = AddUserToGroupForm(request.form)
+    username = form.username.data
+
     user = User.query.filter_by(username=username).first()
     if not user:
         return homeController.homeWithCustomError("user not found")
@@ -69,11 +73,10 @@ def addUserToGroup(groupId, username):
     return openGroup(groupId)
 
 def removeUserFromGroup(groupId, userId):
-    if not canSeeGroupPost(groupId, current_user.id):
+    if not canSeeGroupPost(groupId, current_user.id) and not current_user.admin:
         return homeController.homeWithCustomError("You need to be a member in the group to complete this operation")
 
-    groupuser = Groupuser.query.filter_by(user_id=current_user.id, group_id=groupId).first()
-    groupuser.delete()
+    Groupuser.query.filter_by(user_id=userId, group_id=groupId).delete()
     db.session.commit()
 
     #Empty groups will be automatically deleted

@@ -20,11 +20,11 @@ class Group(db.Model):
         return False
 
     @staticmethod
-    def getUsers(userId):
-        stmt = text("SELECT g.id, g.name "
-            " FROM \"group\" g, account u, groupuser gu"
-            " WHERE gu.user_id = :userId AND g.id = gu.group_id").params(userId=userId)
+    def getUsers(groupId):
+        stmt = text("SELECT u.id, u.username "
+            " FROM account u, \"group\" g, groupuser gu"
+            " WHERE gu.user_id = u.id AND g.id = :groupId").params(groupId=groupId)
             
         res = db.engine.execute(stmt)
-        return [{"id": row[0], "name": row[1]} for row in res]
+        return [{"id": row[0], "username": row[1]} for row in res]
         
