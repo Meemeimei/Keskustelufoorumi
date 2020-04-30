@@ -18,7 +18,7 @@ Kirjautuminen, Kirjoituksen lisääminen, Kirjoitusten näyttäminen eri kriteer
 
 [Käyttöohjeet](../master/Dokumentaatio/Käyttöohjeet.md)
 
-[Create Table -lauseet](../master/Dokumentaatio/CreateTable-Lauseet.md)
+[Create Table -lauseet](../master/Dokumentaatio/CreateTable-Lauseet.txt)
 
 
 Jatkokehitysideoita:
