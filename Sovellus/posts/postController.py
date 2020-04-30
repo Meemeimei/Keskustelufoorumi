@@ -50,7 +50,11 @@ def deletePost(postId):
     if not current_user.is_admin():
         return homeController.homeWithCustomError("You are missing user rights required for this operation")
     post = Post.query.filter_by(id=postId).first()
-    updatePostCounts(post.area_id)
+    if post.area_id:
+        updatePostCounts(post.area_id)
+    else:
+        updatePostCounts(-1)
+    
     Post.query.filter_by(id=postId).delete()
     db.session().commit()
     
@@ -59,8 +63,9 @@ def deletePost(postId):
     return homeController.homeWithCustomMessage("Post removed successfully")
 
 def updatePostCounts(areaId):
-    area = Area.query.filter_by(id=areaId).first()
-    area.messageCount = Area.getMessageCount(areaId)
+    if (areaId != -1):
+        area = Area.query.filter_by(id=areaId).first()
+        area.messageCount = Area.getMessageCount(areaId)
 
     user = User.query.filter_by(id=current_user.id).first()
     user.messageCount = User.getMessageCount(current_user.id)
