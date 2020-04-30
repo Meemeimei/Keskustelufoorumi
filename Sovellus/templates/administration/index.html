@@ -5,7 +5,7 @@
 <div id="messageDiv">{{ message }}</div>
 
 <form method="GET" action="{{ url_for('home') }}">
-  <input id="buttonInput" type="submit" class="btn btn-info" value="Back"/>
+  <input id="buttonInput" type="submit" class="btn btn-info" value="Home"/>
 </form>
 
 <p>
@@ -17,7 +17,7 @@
         <th>Post count</th>
       </tr>
       {% for user in users %}
-      <tr>
+      <tr class="container">
         <td>
           {{ user.username }}
           <form method="POST" action="{{ url_for('deleteUser', userId=user.id) }}">
@@ -34,9 +34,9 @@
           </form>
           {% endif %}
         </td>
-      </tr>
-      <tr>
-        {{ user.countMessages}}
+        <td>
+          {{ user.messageCount}}
+        </td>
       </tr>
       {% endfor %}
     </table>

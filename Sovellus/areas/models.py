@@ -9,12 +9,11 @@ class Area(db.Model):
 
     def __init__(self, name):
         self.name = name
-        self.messageCount = 0
 
     @staticmethod
     def getMessageCount(areaId):
         stmt = text("SELECT COUNT (*) FROM Post"
             " WHERE Post.area_id = :areaId").params(areaId=areaId)
-        res = db.engine.execute(stmt)
+        res = db.engine.execute(stmt).fetchone()
 
-        return res
+        return int(res[0])

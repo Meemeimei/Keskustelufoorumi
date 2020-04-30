@@ -20,6 +20,8 @@ def createPost(areaId):
     db.session().add(post)
     db.session().commit()
 
+    updatePostCounts(areaId)
+
     return openPost(post.id)
 
 def createGroupPost(groupId):
@@ -36,26 +38,29 @@ def createGroupPost(groupId):
 def openPost(postId):
     post = Post.query.filter_by(id=postId).first()
     if (post.group_id is not None):
-        if not groupController.canSeeGroupPost(post.groupId, current_user.id):
+        if not groupController.canSeeGroupPost(post.group_id, current_user.id):
             return homeController.homeWithCustomError("Unauthorized")
     if not post:
         return homeController.homeWithCustomError("Post not found")
 
-    return render_template("area/post.html", post = post, answers=Post.getRelatedAnswers(postId), answerForm = AnswerForm(), editForm = EditForm())
+    return render_template("area/post.html", post=post, answers=Post.getRelatedAnswers(postId), answerForm = AnswerForm(), editForm = EditForm())
 
 def deletePost(postId):
 
     if not current_user.is_admin():
         return homeController.homeWithCustomError("You are missing user rights required for this operation")
-
+    post = Post.query.filter_by(id=postId).first()
+    updatePostCounts(post.area_id)
     Post.query.filter_by(id=postId).delete()
     db.session().commit()
+    
+    Answer.deleteUnconnectedAnswers()
 
     return homeController.homeWithCustomMessage("Post removed successfully")
 
 def updatePostCounts(areaId):
     area = Area.query.filter_by(id=areaId).first()
-    area.postCount = Area.getMessageCount(areaId)
+    area.messageCount = Area.getMessageCount(areaId)
 
     user = User.query.filter_by(id=current_user.id).first()
     user.messageCount = User.getMessageCount(current_user.id)

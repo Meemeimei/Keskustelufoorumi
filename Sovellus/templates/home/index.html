@@ -5,73 +5,78 @@
   <div id="error" class="text-danger">{{ error }}</div>
   <div id="message" class="text-success">{{ message }}</div>
   <p>
-    <div>Create a new area</div>
-    <form class="postForm" method="POST" action="{{ url_for('createArea') }}">
-      <table>
-        <tr>
-          <td>
-            {{ areaForm.name.label }}
-          </td>
-          <td>
-            {{ areaForm.name(class_="form-control", onkeyup="validateAreaName()") }}
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input id="submitAreaButton" type="submit" class="btn btn-success" value="Add a new area" disabled/>
-          </td>
-        </tr>
-      </table>
-    </form>
+    <div class="container">
+      <div>Create a new area</div>
+      <form class="postForm" method="POST" action="{{ url_for('createArea') }}">
+        <table>
+          <tr>
+            <td>
+              {{ areaForm.name.label }}
+            </td>
+            <td>
+              {{ areaForm.name(class_="form-control", onkeyup="validateAreaName()") }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input id="submitAreaButton" type="submit" class="btn btn-success" value="Add a new area" disabled/>
+            </td>
+          </tr>
+        </table>
+      </form>
 
-    {% for area in areas %}
-    <div>
+      {% for area in areas %}
+      <div>
+        <tr>
+          <td><a class="btn btn-link" href='areas/{{ area.id }}'>{{ area.name }}</a></td>
+          <td>{{ area.messageCount }}</td>
+          {% if current_user.admin %}
+          <td>
+            <form method="POST" action="{{ url_for('deleteArea', areaId=area.id) }}">
+              <input type="submit" class="btn btn-info" value="Delete"/>
+            </form>
+          </td>
+          {% endif %}
+        </tr>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="container">
+      <div>Create a new group</div>
+      <form class="postForm" method="POST" action="{{ url_for('createGroup') }}">
+        <table>
+          <tr>
+            <td>
+              {{ groupForm.name.label }}
+            </td>
+            <td>
+              {{ groupForm.name(class_="form-control", onkeyup="validateGroupName()") }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input id="submitGroupButton" type="submit" class="btn btn-success" value="Add a new group" disabled/>
+            </td>
+          </tr>
+        </table>
+      </form>
+
+      {% for group in groups %}
+      <div>
       <tr>
-        <td><a class="btn btn-link" href='areas/{{ area.id }}'>{{ area.name }}</a></td>
-        <td>{{ area.messageCount }}</td>
+        <td><a class="btn btn-link" href='groups/{{ group.id }}'>{{ group.name }}</a></td>
+        {% if current_user.is_admin %}
         <td>
-          {% if current_user.is_admin == True %}
-          <form method="POST" action="{{ url_for('deleteArea', areaId=area.id) }}">
+          <form method="POST" action="{{ url_for('deleteGroup', groupId=group.id) }}">
             <input type="submit" class="btn btn-info" value="Delete"/>
           </form>
         </td>
         {% endif %}
       </tr>
+    {% endfor %}
     </div>
-    {% endfor %}
-
-    <div>Create a new group</div>
-    <form class="postForm" method="POST" action="{{ url_for('createGroup') }}">
-      <table>
-        <tr>
-          <td>
-            {{ groupForm.name.label }}
-          </td>
-          <td>
-            {{ groupForm.name(class_="form-control", onkeyup="validateGroupName()") }}
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input id="submitGroupButton" type="submit" class="btn btn-success" value="Add a new group" disabled/>
-          </td>
-        </tr>
-      </table>
-    </form>
-
-    {% for group in groups %}
-    <tr>
-      <td><a class="btn btn-link" href='groups/{{ group.id }}'>{{ group.name }}</a></td>
-      <td>
-        {% if current_user.is_admin %}
-        <form method="POST" action="{{ url_for('deleteGroup', groupId=group.id) }}">
-          <input type="submit" class="btn btn-info" value="Delete"/>
-        </form>
-      </td>
-      {% endif %}
-    </tr>
-    {% endfor %}
-
+  </div>
   </p>
+  
 </div>
 {% endblock %}

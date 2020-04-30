@@ -20,17 +20,15 @@ class Post(db.Model):
         self.content = content
         self.user_id = user_id
         self.area_id = area_id
-
-    def setGroup(self, group_id):
         self.group_id = group_id
 
     @staticmethod
     def getMessageCount(postId):
         stmt = text("SELECT COUNT (*) FROM Answer"
                      " WHERE Answer.post_id = :postId").params(postId=postId)
-        res = db.engine.execute(stmt)
+        res = db.engine.execute(stmt).fetchone()
 
-        return res
+        return int(res[0])
 
     @staticmethod
     def getRelatedAnswers(postId):
@@ -39,3 +37,21 @@ class Post(db.Model):
         res = db.engine.execute(stmt)
         
         return res
+
+    @staticmethod
+    def deleteGroupPosts(groupId):
+        stmt = text("DELETE FROM Post"
+            " WHERE (Post.group_id = :groupId)").params(groupId=groupId)
+        db.engine.execute(stmt)
+        Answer.deleteUnconnectedAnswers()
+
+        return True
+
+    @staticmethod
+    def deleteAreaPosts(areaId):
+        stmt = text("DELETE FROM Post"
+            " WHERE (Post.area_id = :areaId)").params(areaId=areaId)
+        db.engine.execute(stmt)
+        Answer.deleteUnconnectedAnswers()
+        
+        return True

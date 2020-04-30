@@ -53,10 +53,10 @@ class User(db.Model):
     def getMessageCount(userId):
         stmt = text("SELECT COUNT (*) FROM Post"
             " WHERE Post.user_id = :userId").params(userId=userId)
-        postCount = db.engine.execute(stmt)
+        postCount = db.engine.execute(stmt).fetchone()
 
         stmt = text("SELECT COUNT (*) FROM Answer"
             " WHERE Answer.user_id = :userId").params(userId=userId)
-        answerCount = db.engine.execute(stmt)
+        answerCount = db.engine.execute(stmt).fetchone()
 
-        return postCount + answerCount
+        return int(postCount[0]) + int(answerCount[0])

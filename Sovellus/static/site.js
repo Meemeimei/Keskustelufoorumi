@@ -64,7 +64,7 @@ function validateAreaName() {
 }
 
 function validateGroupName() {
-  if ($("#name").val() !== "") {
+  if ($("#GroupName").val() !== "") {
     $("#submitGroupButton")[0].disabled = false;
   } else {
     $("#submitGroupButton")[0].disabled = true;

@@ -21,10 +21,11 @@
         <form method="GET" action="{{ url_for('administration') }}">
           <input id="buttonInput" type="submit" class="btn btn-info" value="Administration"/>
         </form>
+        {% endif %}
       </div>
     </div>
-
-    {% endif %}
+ 
+    
     {% block body %}
     <p>
     </p>

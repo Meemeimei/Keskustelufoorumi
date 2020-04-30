@@ -35,4 +35,6 @@ def deleteArea(areaId):
     Area.query.filter_by(id=areaId).delete()
     db.session().commit()
 
+    Post.deleteAreaPosts(areaId)
+
     return homeController.homeWithCustomMessage("Area removed successfully")

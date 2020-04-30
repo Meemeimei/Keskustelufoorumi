@@ -98,7 +98,7 @@ def createPost(areaId):
 @app.route("/groupPostCreation/<groupId>", methods=["POST"])
 @login_required
 def createGroupPost(groupId):
-    return postController.createPost(groupId)
+    return postController.newGroupPost(groupId)
 
 @app.route("/posts/delete/<postId>", methods=["POST"])
 @login_required
@@ -129,11 +129,6 @@ def openGroup(groupId):
 @login_required
 def deleteGroup(groupId):
     return groupController.deleteGroup(groupId)
-
-@app.route("/groups/createPost/<groupId>", methods=["POST"])
-@login_required
-def newGroupPost(groupId):
-    return postController.newGroupPost(groupId)
 
 @app.route("/auth/logout")
 @login_required

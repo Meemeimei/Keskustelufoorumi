@@ -6,15 +6,17 @@ Tarkoituksena on luoda keskustelufoorumi tietokantojen harjoitustyökurssille. K
 
 Testitunnukset:
 admin - admin
-Testausta varten, jos uusi käyttäjä rekisteröidään tunnuksella 'admin' se saa suoraan ylläpito-oikeudet. Ainoa tiedon listausmahdollisuus on tällä hetkellä ylläpitäjillä, jotka voivat listata rekisteröityneet käyttäjät.
-
-Uusien muutosten myötä sivun layout kärsi, korjataan seuraavaan päivitykseen
+Rekisteröimällä uuden käyttäjän käyttäjätunnuksella admin, kyseinen tunnus saa ylläpito-oikeudet automaattisesti.
 
 Toimintoja:
 
 Kirjautuminen, Kirjoituksen lisääminen, Kirjoitusten näyttäminen eri kriteerein, Ryhmän jäsenen lisääminen, muokkaaminen ja poistaminen, Vastineen laatiminen ja muokkaus, Kirjoitusten poistaminen, Aiheiden määrittely, muokkaus ja poisto.
 
 [User storyt ja niiden SQL-lauseet](../master/Dokumentaatio/UserStoryt.md)
+
+[Asennusohje](../master/Dokumentaatio/Asennusohje.md)
+
+[Käyttöohjeet](../master/Dokumentaatio/Käyttöohjeet.md)
 
 Tietokantakaavio:
 
